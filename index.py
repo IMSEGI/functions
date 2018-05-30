@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import nltk
+
+import PyPdf2
 
 
-print("hello")
+
+
+#pdf = PdfFileReader(file( "C:\document.pdf", "rb"))
+
