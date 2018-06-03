@@ -1,0 +1,9 @@
+� 2006-2016 Asian Research Publishing Network (ARPN).
+Gas turbines are used in oil platforms, floating liquid natural gas (FLNG) plants, and land based distributed power plants to generate power.
+In Malaysia, as much as 40% of the total electricity (e.g.
+an estimated 783 MW in Peninsular Malaysia, 289 MW in Sarawak, and 42 MW in Sabah) comes from gas turbine driven power plants.
+Some of the challenges in gas turbine operations are stringent safety and emission control requirements, urgent need to reduce life cycle cost, and the need to sustain high efficiency regardless of operating conditions, changing fuel cost, electricity tariff and electricity demand.
+The idea that got attention and intended to address these issues is the concept of integrated approach to remaining useful life prediction and operation scheduling.
+The purpose of the present paper is to review the literatures specific to gas turbine prognostics.
+The reviewed methods include regression methods, physics based models, computational intelligence (artificial neural network and fuzzy systems, evolutionary-based method), and hybrid approaches.
+As it turned out, (i) there is no readily available method that can be used to integrate reliability information into a prognostics model, (ii) the benchmark data from NASA is the only available information that can be used to test new algorithms, (iii) commercial software's like Gate Cycle, PROSIS, and GSP have been used to generate data for diagnostics and prognostics studies, (iv) thermo economic or exergetic approach seems to be less applied to prognostics.

@@ -1,0 +1,10 @@
+© IEOM Society International.
+Gas turbines are used in many areas as primary drives.
+Their critical nature to the adjacent systems often made them a priority in terms of maintenance planning.
+This paper proposes the use of fuzzy systems and bat algorithm to predict remaining useful life of gas turbines.
+Construction of the model and a method for model confidence interval calculations are outlined.
+The proposed approach has general nature and can be applied to any system.
+In the present work, it is tested by considering a turbofan engine having low pressure and high pressure compressors.
+As it turned out, the proposed method has performed well even though the provided data were noisy.
+The results are applicable for early planning of maintenance schedules.
+© IEOM Society International.
