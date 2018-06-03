@@ -40,15 +40,11 @@ def convert_pdf_to_txt(path):
     retstr.close()
     return str
 
+def WriteToFile(txt, filename):
+    with open(filename + '.txt', 'w+', encoding = 'utf-8') as file:
+        file.write(txt)
 
-
-text = convert_pdf_to_txt('document1.pdf')
-
-
-
-
-    
-
-
-
-
+# Provide full path + filename below
+filename = 'S0306261917304415-main'
+text = convert_pdf_to_txt(filename + '.pdf')
+WriteToFile(text, filename)

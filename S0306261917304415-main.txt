@@ -1,0 +1,3925 @@
+Applied Energy 198 (2017) 122–144
+
+Contents lists available at ScienceDirect
+
+Applied Energy
+
+j o u r n a l h o m e p a g e : w w w . e l s e v i e r . c o m / l o c a t e / a p e n e r g y
+
+Performance-based health monitoring, diagnostics and prognostics for
+condition-based maintenance of gas turbines: A review
+Mohammadreza Tahan a, Elias Tsoutsanis b, Masdi Muhammad a,⇑
+
+, Z.A. Abdul Karim a
+
+a Department of Mechanical Engineering, Universiti Teknologi PETRONAS, 32610 Bandar Seri Iskandar, Malaysia
+b School of Engineering, Emirates Aviation University, Dubai, United Arab Emirates
+
+h i g h l i g h t s
+
+ A systematic review of gas turbine engine monitoring approaches is presented.
+ The inception of engine diagnostics and prognostics and their evolution are reviewed.
+ Causes of engine deterioration to facilitate fault identiﬁcation are discussed.
+ Techniques for engine model adaptation through component map tunings are summarized.
+
+a r t i c l e
+
+i n f o
+
+a b s t r a c t
+
+Article history:
+Received 3 November 2016
+Received in revised form 6 April 2017
+Accepted 15 April 2017
+Available online 28 April 2017
+
+Keywords:
+Gas turbine
+Gas-path faults
+Monitoring
+Health assessment
+Diagnostics
+Prognostics
+
+With the privatization and intense competition that characterize the volatile energy sector, the gas tur-
+bine industry currently faces new challenges of increasing operational ﬂexibility, reducing operating
+costs, improving reliability and availability while mitigating the environmental impact. In this complex,
+changing sector, the gas turbine community could address a set of these challenges by further develop-
+ment of high ﬁdelity, more accurate and computationally efﬁcient engine health assessment, diagnostic
+and prognostic systems. Recent studies have shown that engine gas-path performance monitoring still
+remains the cornerstone for making informed decisions in operation and maintenance of gas turbines.
+This paper offers a systematic review of recently developed engine performance monitoring, diagnostic
+and prognostic techniques. The inception of performance monitoring and its evolution over time, tech-
+niques used to establish a high-quality dataset using engine model performance adaptation, and effects
+of computationally intelligent techniques on promoting the implementation of engine fault diagnosis are
+reviewed. Moreover, recent developments in prognostics techniques designed to enhance the mainte-
+nance decision-making scheme and main causes of gas turbine performance deterioration are discussed
+to facilitate the fault identiﬁcation module. The article aims to organize, evaluate and identify patterns
+and trends in the literature as well as recognize research gaps and recommend new research areas in
+the ﬁeld of gas turbine performance-based monitoring. The presented insightful concepts provide
+experts, students or novice researchers and decision-makers working in the area of gas turbine engines
+with the state of the art for performance-based condition monitoring.
+
+Ó 2017 Elsevier Ltd. All rights reserved.
+
+Contents
+
+1.
+2.
+3.
+4.
+5.
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123
+Gas turbine condition monitoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 125
+Principles of gas turbine performance-based monitoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 126
+Engine model performance adaptation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 126
+Fault detection and isolation (FDI) approaches . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 129
+5.1. Model-based methods. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 130
+5.2.
+Data driven methods. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131
+5.3. Hybrid methods. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 133
+
+⇑ Corresponding author.
+
+E-mail address: masdimuhammad@utp.edu.my (M. Muhammad).
+
+http://dx.doi.org/10.1016/j.apenergy.2017.04.048
+0306-2619/Ó 2017 Elsevier Ltd. All rights reserved.
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+123
+
+6.
+
+7.
+
+8.
+
+Fault identification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 134
+6.1.
+Introduction to gas path faults . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 134
+Fouling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 136
+6.1.1.
+Erosion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 136
+6.1.2.
+Corrosion. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 136
+6.1.3.
+Object damage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+6.1.4.
+6.1.5.
+Tip clearance increase (blade rubbing) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+6.1.6.
+Thermal distortion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+6.2.
+Gas path fault quantification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137
+Fault prognostics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 138
+7.1. Model-based methods. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 139
+7.2.
+Data-driven methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 139
+Concluding remarks and future challenges. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 140
+Acknowledgement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+
+1. Introduction
+
+The gas turbine is one of the main sources of power for many
+applications such as civil and military aircraft, naval and commer-
+cial ships, electricity production, gas compression, and high-scale
+pumping services. The deep penetration of renewables into the
+energy mix has ampliﬁed the need for gas turbines to operate more
+efﬁciently and in partnership with renewable energy sources such
+that energy is produced in an environmentally friendly manner. In
+addition, for many of the world’s largest manufacturers, aftermar-
+ket service and parts operations are essential to their business. For
+example, Rolls-Royce has more than 14,000 aerospace engines in
+service, operated by more than 500 airlines and powering more
+than 5.5 million commercial ﬂights per year and the company’s
+service and part business revenue is about 55% of the approxi-
+mately US$11 billion total revenues [1]. Within this context, sev-
+eral technical challenges with respect to the operation and
+lifecycle cost of gas turbines must be addressed to efﬁciently
+implement this technology in a volatile energy market. It is well
+known that the development and implementation of a robust, efﬁ-
+cient and ﬂexible maintenance strategy signiﬁcantly improves the
+reliability and availability of gas turbine assets and, as a result,
+decreases the number of unpredicted breakdowns, operating costs,
+
+and downtime. The main factors affecting gas turbine maintenance
+planning are shown in Fig. 1. It is clear from Fig. 1 that there are
+numerous trade-offs among environmental, technological, eco-
+nomic and operational factors that establish a successful mainte-
+nance and operational strategy of gas turbine assets [2].
+
+In recent years, the gas turbine manufacturers have trans-
+formed into modern digital businesses by converging the industrial
+equipment, data and the internet into a platform that enables the
+optimization of asset monitoring and management [3]. Examples
+of such technologies are GE’s Predix and Digital Twin where in
+the case of gas turbines numerous ﬂeets of engines across the globe
+are simulated, monitored and analyzed as seen from Fig. 2.
+
+The analytics methods, which are based on banks of data con-
+taining the operational and simulation history of the engines, are
+employed for improving the gas turbine operators understanding
+for these complex nonlinear machines. Therefore, the maintenance
+actions are based on informed judgments for the assets in order to
+maximize their proﬁtability, reduce life cycle costs and improve
+reliability and availability. It has been recently demonstrated that
+the implementation of such digital platform for analytics and
+optimization can have signiﬁcant savings in the Oil & Gas and
+the Airline sectors to name a few. For instance, in the airline sector,
+both Southwest [4] and Quantas [5] airlines are in the process of
+
+Facilities and capabilities 
+Knowledge and experience
+
+Recommended maintenance program
+Data collection and analysis system
+On-site maintenance capabilities
+Availability of replacement parts
+
+Environmental and 
+safety issues
+Environmental 
+effects
+Personnel safety
+
+Maintenance planning key 
+
+factors
+
+Economic issues
+Cost of downtime
+Required reliability 
+Life cycle cost
+
+Design and operation feature
+Engine size type and technology
+
+Type of fuel
+
+Utilization needed
+Operating conditions
+
+Fig. 1. Principal factors that affect gas turbine maintenance planning [2].
+
+124
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+Fig. 2. The principle of GE’s predix and digital twin [4].
+
+Table 1
+Comparison of the most common maintenance strategies [9,10].
+
+Theory/principle
+ Fail and ﬁx
+ Reactive-based
+ Unscheduled
+ Prevent strategy
+ Time-based
+ At regular intervals
+
+Method
+
+Corrective
+
+maintenance
+
+Preventive
+
+maintenance
+
+Predictive
+
+maintenance
+
+Data required
+
+–
+
+Data analysis
+
+Decision process
+
+–
+
+–
+
+Event/failure user/time-based data
+
+Reliability theory based on
+bathtub curve assumptions
+
+ Predict & prevent strategy
+ Condition-based
+ Just-in-time
+
+Measurements that provide
+information about mechanical or
+performance condition of equipment
+
+Monitoring the
+equipment degradation
+
+Determining the maintenance
+interval that optimizes the criteria of
+interest (cost, availability, reliability
+and so on).
+
+Performing continuous condition
+monitoring for health assessment,
+prognostics, and diagnostics.
+
+saving millions of dollars in fuel cost by a data-crunching partner-
+ship with the engine manufacturers. On the other hand in the O&G
+sector [6], the savings attributed by implementing this digital plat-
+form is in the order of billions per year taking into account that an
+unscheduled downtime for an LNG facility and an offshore plat-
+form cost $25 million and $7 million per day, respectively. The
+opportunity for developing and adopting such a digital platform
+based on engine models, condition monitoring, diagnostics and
+prognostics solutions is spearheading the transformation of the
+conventional industrial environment into its digital era with huge
+prospects for the availability and reliability of equipment.
+
+It is generally accepted [2,7–9] that condition-based mainte-
+nance (CBM) is an effective method for enhancing the machinery
+maintenance strategy and shifting from classical ‘‘fail and ﬁx’’ prac-
+tices to a ‘‘predict and prevent’’ methodology. As summarized in
+Table 1, while reactive-based corrective maintenance is performed
+just upon failure or error happening in the system, preventive
+maintenance employs the statistical machine information and
+operational experience to schedule successive overhauls in order
+to prevent unexpected failure in the system. However, to improve
+the reliability and availability of the system, in predictive mainte-
+nance, the operating conditions of the equipment are continuously
+monitored to detect the need for real-time maintenance. Conse-
+quently, the continuous development and implementation of con-
+dition monitoring, diagnostic and prognostics methods can
+signiﬁcantly reduce both the economic losses caused by system
+breakdown and the costs attributed to unnecessary repair and
+replacement of components.
+
+Generally, the informed judgment that supports any mainte-
+nance decision is the objective of the CBM, the success of which
+relies on two related processes described as follows:
+
+(A) Diagnostics is the process of determining the health status
+and the equipment deterioration using information deliv-
+ered by the condition-monitoring system [11]. The main
+objectives of diagnostics are: (i) fault detection, which indi-
+cates that an undesirable event is imminent; (ii) fault isola-
+tion, which locates the faulty component; and (iii) fault
+identiﬁcation, which aids in determining the root cause of
+the fault.
+
+(B) Prognostics is the ability to forecast the evolution of engine
+deterioration [12]. The two major objectives of prognostics
+are: (i) forecasting the impending failures and (ii) estimating
+the remaining useful life of the engine.
+
+As discussed by Puggina et al. [13], the implementation of
+proper diagnostic and prognostic approaches has several merits
+mainly including tuning components costs and performing predic-
+tive maintenance actions, optimizing shop visits and providing
+spare parts for efﬁcient maintenance management, and optimizing
+gas turbine operating condition. Brasco et al. [14] also explain that
+these models allow to make estimates on the relative lifetimes of
+engines under different conditions and subsequently the informa-
+tion can be used in ﬁnancial considerations for producers and
+consumers.
+
+A big family of research studies has been performed in the area
+of diagnostics and prognostics, which ampliﬁes the importance of
+performance-based monitoring in gas turbine health management.
+Many advances and developments in the theory, application, and
+implementation of these tools have been recently presented in
+journals, technical reports, and conference proceedings. Moreover,
+the need of condition monitoring, diagnostic and prognostic tools
+is greater now, more than ever before, given that the gas turbines
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+125
+
+are operating under transient conditions which include fast start
+up and shut downs to compensate for the intermittent nature of
+renewables. Under such operating conditions the gas turbines are
+consuming their useful life faster than a base load gas turbine.
+Within this context, a new group of research works dealing with
+the challenging aspect of performing diagnostic and prognostics
+under these conditions has emerged towards improved condition
+based maintenance. In contrary to the excellent existing reviews
+of gas turbine diagnostics by Li [15], Marinai et al. [16], and Vol-
+poni [17], this review aims to highlight the recent trend for per-
+forming diagnostics and prognostics with transient data. For
+transient engine operating conditions, the condition monitoring
+systems should capture the fast nonlinear dynamics of the engine
+at an increased frequency in order to establish a good quality data
+set for diagnostic and prognostic purposes. Under this scheme the
+most challenging aspect of gas turbine diagnostics is the fact that
+the engineers/data scientists have to extract, correct, ﬁlter and
+smooth the vast amount of gas path measurements from ‘‘data
+lakes’ in order to establish a high-quality data set for diagnostics
+and subsequently prognostics. The importance of performing diag-
+nostics under transient conditions is ampliﬁed by the fact that
+prognostic methods are heavily relying on the engine operating
+and ambient conditions. The reduction of the downtime and
+improvement in the availability and reliability of dynamic operat-
+ing gas turbines has transformed the ﬁeld of diagnostic and prog-
+nostics into a challenging arena for scholars of diverse disciplines
+to propose numerous diagnostic and prognostic solutions. Given
+the plethora of papers in the ﬁeld, this review article aims to pro-
+vide insights about where the current research is heading and
+those issues that attract signiﬁcant research and development in
+the short and long term. To achieve this goal, the state of the art
+of performance-based health monitoring technologies and applica-
+tions for gas turbine power integration support are reviewed from
+different aspects. The frameworks used in a comprehensive gas
+turbine performance-based health management system, beginning
+with data collection and extending to advisory generation for deci-
+sion support are presented. The article aims to organize, evaluate
+and identify patterns and trends in the literature as well as recog-
+nize research gaps and recommend new research areas in the ﬁeld
+of gas turbine monitoring. This study brings together several con-
+cepts of gas turbine monitoring in an insightful way that has not
+been done before.
+
+The remainder of this paper is organized as follows. Section 2
+introduces the various types of gas turbine monitoring techniques.
+Section 3 describes the principles and the basic concept of gas tur-
+
+bine performance-based condition monitoring. Advances in engine
+performance simulation and adaptation are summarized in Sec-
+tion 4, followed by sections on recent research in gas turbine
+performance-based fault detection and isolation (Sections 5), fault
+identiﬁcation (Section 6) and engine deterioration prognostics
+(Section 7). Finally, Section 8 offers concluding remarks together
+with research directions needed for the next generation of engine
+diagnostics and prognostics schemes.
+
+2. Gas turbine condition monitoring
+
+Typical maintenance contracts are progressively altered to
+reﬂect the bilateral interest among manufacturers and operators
+that demand the best deals in terms of operation and maintenance.
+Moreover, a signiﬁcant trend has emerged in which the gas turbine
+operators demand from the manufacturers a guaranteed degrada-
+tion rate and lifecycle cost depending on the use of the equipment.
+In gas turbine applications, a wide range of requirements set by the
+operators should be met by the manufacturers in global and long-
+term service contracts. The main objective is to reach effective
+responses to these requirements through the development of
+advanced tools for precise condition-based maintenance via condi-
+tion monitoring. Generally, gas turbine condition monitoring can
+be implemented using different methods and technologies of dif-
+ferent ﬁdelity, each with its own advantages (Fig. 3) [18].
+
+The causes of gas turbine deterioration fall into two categories.
+The ﬁrst cause is of a mechanical nature where the phenomena are
+not aerodynamically coupled such as misalignment, unbalance,
+loose components, bearing defects, and lack of lubrication. As
+shown in Fig. 3, many techniques such as vibration, oil and wear
+debris analysis, acoustics, thermography, lubrication ﬂow parame-
+ters, load analysis, and metal temperature (which are considered
+non-performance-based methods) can be used to assess this dete-
+rioration. The second cause is aerodynamic or performance related
+problems such as fouling and debris deposit in axial compressors,
+erosion, and corrosion of the blades, improper combustion. In the
+case of this kind of deterioration, performance-based health mon-
+itoring, also known as gas path analysis (GPA), is a cost-efﬁcient
+approach to delivering early warning information on ongoing or
+impending failures.
+It should be noted that as discussed by
+Mehr-Homhi et al. [19] several problems that manifest themselves
+as the mechanical error may, in fact, have underlying causes that
+are aerodynamic (or performance) related in nature and can be cat-
+egorized as aeromechanical i.e. mechanically and aerodynamically
+
+Performance-based
+
+Gas path analysis
+
+Non-performance-based
+
+Gas turbine condition 
+monitoring methods
+
+On-line or on-board monitoring
+
+Off-line or off-board monitoring
+
+Fig. 3. Gas turbine condition monitoring methods.
+
+Oil sample
+
+Thermography
+
+Strain analysis
+
+Vibration
+
+Metal temperature
+
+Load analysis
+
+Acoustics
+
+126
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+Table 2
+The most important research efforts focused on non-performance monitoring.
+
+Type of fault
+
+Mechanical error
+
+Reference
+
+Goal of research
+
+Wang and Zhang [21]
+Ogbonnaya [22]
+Walker et al. [23]
+Madhavan et al. [24]
+
+Engine prognosis based upon oil analysis
+Rotor shaft fault diagnosis and prognosis using misalignment, imbalance, crack and eccentricity
+Localizing unbalancy looking at stationary and rotating vibration phenomena
+Vibration-based damage detection of rotor blades
+
+Faults in auxiliary subsystems
+
+Pennacchi and Vania [25]
+Watson et al. [26]
+
+Diagnostics of a crack in load coupling
+Vibration diagnostics of accessories
+
+Sensor uncertainties
+
+Pourbabaee et al. [27]
+Fadlun et al. [28]
+Palmé et al. [29]
+
+Sensor fault detection, isolation, and identiﬁcation
+Demonstration of inﬂuence of instruments accuracy on condition-based maintenance
+Fault detection and isolation of sensor
+
+coupled. Engine surge or corroded unbalance blades are examples
+of such a case that are aerodynamic in nature but cause mechanical
+errors such as excessive vibration. The study by Barad et al. [20]
+also emphasizes the need for implementation of performance-
+based health monitoring in gas turbine maintenance since it cre-
+ates faster and more reliable information for gas turbine users
+who reﬁne the maintenance strategy accordingly. Therefore, this
+study mainly focuses on review and summarizing outstanding
+efforts that are conducted on gas turbine fault detection and prog-
+nostics using gas path faults and performance deterioration. How-
+ever, a family of scholarly works employs non-performance-based
+methods for gas turbine monitoring. Table 2 presents a list of
+recent most important such research efforts.
+
+As shown in Fig. 3, gas turbine monitoring system can be gener-
+ally categorized as on-line and off-line monitoring. On-line moni-
+toring systems in industrial gas turbines is a common practice
+nowadays [30,31] which offers the mean to continuously monitor
+the performance of the engine over its lifetime and can be used
+in engine fault diagnostics, prognostics and control purposes in
+real time. This philosophy has also started to be adopted in the case
+of aero engines. For example, Rolls Royce uses Engine Health Man-
+agement (EHM) to track the health of the engine, using onboard
+sensors and live satellite feeds. Although many recent research
+efforts have driven great improvement in this area, the high costs
+and inaccuracy due to monitoring of data characterized by noise
+are the main limitations of these methods. However, in off-line
+or off-board monitoring, the essential data are acquired using an
+embedded device and are transmitted to the analysis server or
+ground station for further data analysis in the future. Off-line mon-
+itoring is not as costly as on-line methods and yields accurate
+results by implementing the appropriate data processing tech-
+niques. However, the increased risk of using off-line monitoring
+and consequently missing certain failure events that occur
+between successive data acquisitions should be noted.
+
+parameters, it is possible to identify faulty components [33]. The
+theory underlying this concept is summarized in Fig. 4.
+
+*
+
+The most crucial component degradations are those that occur
+in compressors and turbines because these components are the
+most important and expensive components in gas turbine engines.
+Combustion chamber degradation is not likely to be the direct
+cause of performance deterioration and therefore cannot be
+detected by gas path analysis [35]. The degradation might be rep-
+resented by the deviation of component health parameters, inde-
+pendent variable (D x
+), and measurements, dependent variable
+(D z
+
+*
+).
+Several limitations in the application of performance monitor-
+ing make the performance-based diagnostic and prognostic prob-
+lem a challenging one. First, to perform a health assessment,
+diagnostics and prognostics in a comprehensive condition-based
+maintenance program, in-depth knowledge of the engine perfor-
+mance and a complete set of operating measurements are neces-
+sary. In addition, careful estimates are required to select the
+appropriate type and number of measurements and the corre-
+sponding sensor locations. Improper selection might lead to non-
+convergence of the solution process [36]. Measured data combined
+with sensor noise and bias is the third challenging issue. The sensor
+measurements are often distorted by noise and bias, thereby mask-
+ing the true condition of the engine and leading to incorrect esti-
+mation result [37]. Finally, the combined effect of system non-
+linearity and sensor selection might result in multiple health
+degradation scenarios that produce similar measurement shifts.
+This is a difﬁcult problem to deal with because of estimation tech-
+niques, in general, give only one set of estimated health parameters
+for a given set of measurements without the capability to indicate
+the level of conﬁdence in the results.
+
+4. Engine model performance adaptation
+
+3. Principles of gas turbine performance-based monitoring
+
+The most popular performance-based concept for assessing the
+behavior of a gas turbine is gas path analysis (GPA), which is brieﬂy
+described as follows.
+
+Physical faults yield to deviations in one or more of the engine
+health variables or independent parameters, such as component
+ﬂow capacity and efﬁciency. These factors in turn cause deviations
+in the measured variables or dependent parameters, such as pres-
+sure and temperature, fuel ﬂow rate and rotational speeds [32].
+Component health parameters are not directly measurable, such
+as mass ﬂow functions and component efﬁciencies, but they are
+thermodynamically correlated with the measurable parameters.
+As a consequence, gas-path faults have observable effects on the
+measurements. With the availability of an essential measurement
+set and a model function that relates these data to the health
+
+Before exploring the performance-based diagnostic and prog-
+nostic approaches, it is necessary to consider the possible sources
+of data and information that could potentially feed the process.
+As discussed in detail in subsequent sections, gas performance
+diagnostic approaches can be generally categorized into model-
+based and data-driven methods. In model-based methods, an ana-
+lytical model of the engine must be developed and progressively
+updated to match the current status of the engine. Using this pro-
+cess, the health parameters can be continuously calculated, and
+their deviations from the normal condition can be implemented
+for performance-based monitoring.
+In data-driven methods,
+although the fault detection module can be developed only with
+data corresponding to the engine healthy condition, the fault isola-
+tion module must be developed for the healthy condition and all
+different faulty conditions. Therefore, the required data can be col-
+lected in three ways. First from the real engine over its lifetime,
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+127
+
+Fault prognosis
+
+Fault identification
+
+Maintenance 
+decision making
+
+Gas path faults in 
+cold section or 
+
+hot section
+
+(Deviation of 
+
+component health 
+
+parameters)
+
+Fault 
+
+detection and 
+
+isolation 
+module
+
+Degraded performance parameters
+
+Engine air flow rate
+Compressor efficiency
+Compressor pressure ratio
+Turbine efficiency
+Turbine expansion ratio
+Temperature profile
+
+Deviation of measured parameters
+
+o
+t
+ 
+d
+a
+e
+L
+
+e
+s
+u
+a
+C
+
+(Deviation of 
+measurements)
+
+CC
+
+T
+
+C
+
+Fig. 4. Concept of gas turbine performance-based condition monitoring, adopted from [34].
+
+Set point
+
+Controller
+
+Actuators
+
+Engine
+
+Sensors
+
+Engine 
+
+Performance 
+
+model
+
+Ambient 
+condition
+
+Stop
+
+Yes
+
+Δz=0?
+
+No
+
+Fig. 5. Flow chart of the performance adaptation process [43].
+
+second from experimental tests, and third from an engine model.
+The ﬁrst and second methods are costly and may require a high
+variety of sensors for computing accurately the mass ﬂow and
+isentropic efﬁciency parameters of the engine components [38].
+Reduction of the collected data or experimental measurements to
+a minimum and collection of the remaining quantities using a
+gas turbine model is an affordable way to address this problem.
+Although a 0-D model is adequate for performance diagnostic pur-
+poses, it is necessary to progressively tune/adapt the model for
+
+improving the accuracy of the diagnostic analysis. Therefore, in
+the model-based methods, and even in data-driven methods for
+design and testing the accuracy of monitoring systems, access to
+an accurate engine model is beneﬁcial. Although the knowledge
+of modeling gas turbines at the design point and in off-design con-
+ditions can be found in many references such as [39,40], as indi-
+cated by many studies (e.g., Ref. [41,42]), the major drawback in
+development of these models is the lack of component maps. These
+data are usually proprietary to the gas turbine manufacturers, and
+
+128
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+only a limited portion of the performance data, in the form of char-
+acteristics charts derived from experimental tests or from an
+engine performance prediction program referred as the ‘‘engine
+deck”, might be available to the ﬁnal users. In this condition, the
+required engine model can be reﬁned and matched for the engine
+under investigation using performance adaptation through compo-
+nent characteristic tuning. The implementation of the adaptive
+modeling diagnostic method allows for accurate condition assess-
+ment during base and part load operation leading to the identiﬁca-
+tion of engine components deterioration and the root cause of an
+engine performance shift [30]. As shown in Fig. 5, performance
+adaptation uses an optimization algorithm to tune the non-
+measurable component parameters (x). Toward this goal, for a
+speciﬁc controller set point (u), which is related to the required
+power and rotational speed, and in a speciﬁc ambient condition,
+the model will be optimized in such a manner that the model out-
+put measurements (zm) match the collected measurements of the
+reference engine (zr). Depending on the control architecture of
+the engine, the control parameter u which is also known as ‘‘han-
+dle” can be fuel ﬂow, power output, turbine entry temperature,
+shaft rotational speed or any other quantity that governs the ﬂow
+of the system’s energy.
+
+The overall objective of
+
+the component map modeling
+approaches is to obtain mathematical equations that can accu-
+rately exhibit the relationship between corrected rotational speed,
+corrected ﬂow capacity, pressure ratio, and isentropic efﬁciency. To
+simplify the model using performance maps, it is common to nor-
+malize the corrected speed, corrected mass ﬂow, pressure ratio and
+isentropic efﬁciencies using design point values. This work reviews
+a family of component map modeling methods aimed at improving
+the accuracy of gas turbine performance simulation for diagnosis
+and prognosis.
+
+Scaling is one of the most common methodologies used in the
+process of component map representation [44–47]. In this method,
+all of the values of the original curve are multiplied by a speciﬁc
+factor to obtain the component characteristics of a similar engine.
+The conventional form of this method uses a constant scaling fac-
+tor in such a manner that the design point of the targeted engine
+becomes the same as the design point of the reference engine.
+However, due to two major problems, use of this method in appli-
+cations that require higher accuracy presents two main limitations.
+First, the selected reference gas turbine should be highly similar to
+the target engine. Second, the exact design points of both the ref-
+erence and target gas turbines must be known. A modiﬁed version
+of the scaling method is presented by Kong, Ki et al. [45] in which
+the experimentally collected performance data at certain off-
+design points are used in a performance adaptation model to pro-
+mote the scaling factors with the aim of achieving better-scaled
+maps. Li et al. [46,47] also applied genetic algorithms to search
+for an optimal set of linear and nonlinear scaling factor functions
+in a performance adaptation scheme.
+
+Stage stacking is the procedure used to obtain the overall mul-
+tistage compressor and turbine maps using generalized stage per-
+formance curves. This technique permits an in-depth stage-by-
+stage analysis of the ﬂow through the compressor and turbine. This
+method is primarily used to tune the compressor map through
+stage-by-stage analysis. The general theory and the preliminary
+successful implementation of this method can be found in the
+works done by Muir et al. [48] and Howell and Bonham [49]. A
+recent development of this technique could be found in the work
+done by Spina [50]. In this study, the author introduced a tech-
+nique during which the unknown parameters specifying the gener-
+alized stage performance are determined by combining a Cycle
+Program with the compressor and turbine performance maps
+obtained using the stage-stacking procedure. This is performed
+by seeking the values of the unknown parameters that better adapt
+
+to overall performance and thermodynamic measurements col-
+lected on a gas turbine. Muir et al. [48] applied this methodology
+for compressor map tuning and demonstrated that it is appropriate
+for predicting the performance of elements that incorporate vari-
+able stators. In another effort, Mirza-Baig and Saravanamuttoo
+[51] approximate the mass ﬂow characteristics of multistage tur-
+bines by nozzle characteristics. Lee and Kim [52] also employed
+the stage-stacking method for the compressor, and a stage-by-
+stage method considering blade cooling for the turbine to perform
+an off-design performance simulation. The result of this study
+showed that the component model obtained using this model are
+quite reliable for performance simulation.
+
+In another group of component map representation methods
+known as Regression-based map ﬁtting, an assumed mathematical
+model for the characteristic curves is tuned through performance
+adaptation and represents another effective technique. Kong and
+Ki [53] used this technique by applying three order polynomial
+equations to ﬁnd the corrected compressor ﬂow rates and efﬁ-
+ciency curves as a function of pressure ratio and corrected speed.
+In this work, an error minimization genetic algorithm is used to
+ﬁnd the regression coefﬁcients in the process of performance adap-
+tation. With the objective of higher prediction accuracy for engine
+performance, Tsoutsanis et al. [41,42] established a new compres-
+sor map generation model using a novel regression technique,
+which assumes that at the constant corrected speed lines, the pres-
+sure ratio is an elliptic function of the corrected mass ﬂow rate and
+the efﬁciency is a third-order polynomial curve of the corrected
+mass ﬂow rate. Those researchers took advantage of genetic algo-
+rithms to determine the coefﬁcients of the elliptical functions
+and polynomials. In another effort by Tsoutsanis et al. [54,55], a
+set of polynomial equations for turbine pressure ratio versus ﬂow
+capacity curves and a set of trigonometric functions were used to
+represent the isentropic efﬁciency versus corrected mass ﬂow rate
+curves. These studies used Matlab’s built-in nonlinear uncon-
+strained optimization algorithm known as ‘‘fminsearch” in the per-
+formance adaptation process.
+
+Table 3 presents the main features of these three techniques
+that are used to represent the gas turbine component characteristic
+maps.
+
+All three introduced methods require an optimization process
+to ﬁnalize the component map tuning. In fact, in a particular model
+that simulates compressor and turbine characteristics, adaptation
+can aid in ﬁnding the optimal scaling factors, the rating parameters
+of the stage, and the regression model coefﬁcients.
+
+In addition to the above groups of component map modeling
+techniques that have been successfully integrated into engine
+models and tested for diagnostic purposes, it is worth mentioning
+a group of studies that examined the representation of the com-
+pressor map alone. In principle, the compressor map is the most
+
+Table 3
+A comparison of map presentation methods for gas turbine components.
+
+Method
+
+Scaling
+
+[38,44,56]
+
+Features
+ Easier implementation in comparison to stage stack-
+ing methods since it only needs component design
+point and similar characteristic maps.
+ Includes either a constant, linear or quadratic regres-
+
+sion model
+
+Stage-stacking
+
+[50,57]
+
+Regression
+
+[41,42,54,55]
+
+analysis of the ﬂow through components
+
+ More general and enables a detailed stage-by-stage
+ Suitable for variable stator geometry
+ Needs detail geometry of each stage
+ Constructs
+parameters
+ More effective under transient conditions
+
+relationships among key component
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+129
+
+challenging and crucial performance characteristic of an engine
+model, and this importance has led to the development of several
+methods for representing the compressor map characteristics. The
+majority of these studies used artiﬁcial neural networks [58–60]
+and fuzzy expert systems [61] to represent the shape and predict
+the operating points within the modeled curves of the compressor
+performance maps. Maps can also be determined by ﬂow analysis
+schemes such as the stream line curvature (SLC) methodology [62]
+or high-ﬁdelity computational ﬂuid dynamics approaches (CFD)
+[63] if the geometry of the mechanical device is accessible.
+
+A variety of models and software tools have been developed for
+both off-line and real-time performance adaptation of gas turbines
+with different levels of complexity, ﬁdelity, accuracy and computer
+performance requirements. In the Aerospace Department of Delft
+Technical University, a software package known as GSP (a gas tur-
+bine simulation program) [64] was developed and is capable of
+simulating almost all types of gas turbines (turboshaft, turboprop,
+turbofan, single and multi-shafts, etc.). Another software product
+known as GASTURB, developed by Kurzke [65], is updated to ver-
+sion 12.0 and is extensively used as a gas turbine performance sim-
+ulator. GASTURB is able to simulate most of the normal engine
+types, including mixed and unmixed turbofans with or without
+boosters, turboshafts with or without heat exchangers, and one-
+shaft or two-shaft turboprop engines. US engine manufacturers
+and research institutes,
+including NASA, have collaboratively
+developed NPSS [66,67] (Numerical Propulsion System Simulation)
+which is a powerful gas turbine simulation tool with several
+advanced capabilities. In another effort, an interactive gas turbine
+simulation and modeling environment called ‘‘PROOSIS” [68]
+(PRopulsion Object Oriented SImulation Software) has been devel-
+oped as part of the ‘‘VIVACE-ECP” (Value Improvement through a
+Virtual Aeronautical Collaborative Enterprise - European Cycle Pro-
+gramme) project to be used by European industries. Since the mid-
+1990s, SIMULINK and many other GUI (graphical user interface)
+programs have been developed using MATLAB [69–71].
+
+5. Fault detection and isolation (FDI) approaches
+
+Over the last two decades, signiﬁcant research efforts have
+focused on the development of performance-based fault detection
+
+and isolation for gas turbines. In the fundamental sense, FDI
+involves continuous processing of engine performance measure-
+ments in regard to controller set point (uÞ and ambient condition
+to track the deviations of selected engine health parameters (zr)
+from their corresponding values at the clean/healthy condition
+(zm). The main procedure of this method is illustrated in Fig. 6.
+
+The chosen parameters and the analysis method characterize
+each different diagnostic method. Generally, three different cate-
+gories of performance monitoring approaches are used in the
+condition-based maintenance of gas turbines. The ﬁrst category
+includes model-based methods, which involve analytical modeling
+of gas turbine operation and are quite promising for real-time con-
+dition monitoring. Model-based approaches have proven their
+ability to detect both abrupt and more notably, gradual degrada-
+tion in engine performance in real-time online implementations.
+However, as the modeling uncertainties and system complexity
+increase, the monitoring accuracy decreases [72]. The second
+group refers to data-based models such as neural networks sys-
+tems that ‘learn’ from examination of real data containing nominal
+and known faulty conditions. Research results have shown that
+these methods offer a ﬂexible tool for addressing the complex
+and non-linear characteristics of dynamic systems. The last group
+includes systems that embody ‘rules of thumb’ that have been
+developed and reﬁned by human maintenance experts. Examples
+of these systems are rule-based expert systems and fuzzy logic
+approaches. Although these methods are capable of offering expla-
+nations and methods that reach a particular solution, it is highly
+complex to ﬁnd a proper set of rules, functions, and tuning that
+can obtain a satisfactory solution as the system complexity
+increases. These two latter groups of approaches, which are also
+known as data-driven techniques, heavily rely on real-time or col-
+lected historical data from engine sensors and do not directly
+require a detailed mathematical model of the system.
+
+Gas turbine performance diagnostic approaches can be gener-
+ally categorized as linear or non-linear methods. Kamboukos and
+Mathioudakis [73] compared these two methods theoretically
+and presented an overall assessment of their merits and weak-
+nesses with the conclusion that the use of linear methods might
+lead to substantial inaccuracies in estimation of degradation. The
+inadequacy of the linearity assumption has led to the development
+
+Set point
+
+Controller
+
+Actuators
+
+Engine
+
+Sensors
+
+Ambient 
+condition
+
+Engine Model
+
+FDI model
+
+Reconcile and 
+report result
+
+Fig. 6. Schematic representation of an engine FDI system.
+
+130
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+of non-linear alternatives. Although all data-driven approaches are
+non-linear, model-based methods involve both linear and non-
+linear methods. With the plethora of techniques available to mon-
+itor the health of equipment, the question always arises as to the
+optimal technique for interpreting the condition of the engine.
+The following subsections offer a summary of key approaches
+applied for this purpose.
+
+Set point
+
+Controller
+
+5.1. Model-based methods
+
+Engine
+
+Sensors
+
+*
+
+*
+
+*
+
+*
+
+ 1  D z
+
+Using the engine performance model, a nonlinear relationship
+), and engine component
+) at a given operating point and at certain time
+
+*
+between gas path measurements (z
+*
+health parameter (x
+during operation can be simpliﬁed to a linear approximation.
+* ¼ H  x
+ð1Þ
+z
+where H is known as the inﬂuence coefﬁcient matrix (ICM). With
+this assumption, the ﬁrst gas path analysis method was introduced
+by Urban [74], which is now referred to as linear GPA using inﬂu-
+ence coefﬁcient matrix (ICM) inversion. The original concept of this
+ 1 in Eq. (2),
+diagnostic technique relies on using the inverted ICM, H
+known as the fault coefﬁcient matrix (FCM). FCM assists in obtain-
+ing deviations in the engine component health parameter (D x
+) by
+examining the deviations in the gas path measurements (D z
+).
+ð2Þ
+* ¼ H
+D x
+Linear GPA with ICM inversion has been applied widely to gas
+path analysis of engines. A valuable overview of this method is
+given by Smetana [75]. However, due to the nonlinear thermody-
+namic behavior of engine performance, the linear performance
+adaptation might not be able to deliver an accurate estimation of
+engine performance deviation. To improve the accuracy of this lin-
+ear method, Escher and Singh [76] applied a Newton-Raphson-
+based iterative method to solve the non-linear relationship
+between the engine performance parameters and measurements.
+Gas path analysis using ICM inversion is idealistically simple, offers
+quick solutions and is capable of performing multiple fault diag-
+noses. However, this method is limited to detecting the degrada-
+tion at a small scale.
+In addition, an inaccurate inﬂuence
+coefﬁcient matrix, measurement uncertainty, and correlated mea-
+surements seriously affect its accuracy. Moreover, using this
+method, the number of measurements (m) must be equal or
+greater than the number of health parameters (n), (i.e. m P nÞ, to
+ensure a unique solution of performance adaptation.
+
+The weighted-least-squares technique is used in many engine
+gas path analysis systems to increase the diagnostic accuracy in
+the case of sensor errors [77,78]. The least square ﬁtting process
+uses a parametric model to minimize the sum of weighted squared
+deviations between the actual and predicted measurements using
+one or more coefﬁcients that are estimated by the ﬁtting process.
+In addition, the measurement uncertainties associated with the
+gas path measurements are also considered using a weighting
+matrix with their respective sample variances. As described by
+Kamunge [79], the modiﬁed FCM and performance model can be
+written as
+H# ¼ ðHTWHÞ 1HTW
+ð4Þ
+* ¼ H#  D z
+D x
+where W is the weighted individual matrix. The implementation of
+this technique in GE’s GPA tool, known as the TEMPER program, is
+discussed in the study by Doel [80]. Similar to the description in
+the preceding section, a Newton-Raphson-based iterative calcula-
+
+ð3Þ
+
+*
+
+Ambient 
+condition
+
+Engine model
+
+Kalman filter
+
+Fig. 7. Architecture of engine health monitoring using the Kalman ﬁlter technique
+[83].
+
+tion process can be used. As stated by Li and Korakiantis [81], the
+non-linear weighted-least-square method is capable of considering
+the performance nonlinearities of an advanced non-linear diagnos-
+tic approach. Kamunge [79] presented a detailed discussion on the
+non-linear weighted least squares method and highlighted the
+model capabilities in terms of addressing random measurement
+noise and fast computation.
+
+Kalman ﬁlter employs the system’s dynamics model and
+sequential measurements to estimate the state variables of
+dynamic systems which are better than the estimate obtained by
+using measurement alone. The schematic
+representation of
+performance-based condition monitoring of gas turbine engine
+using Kalman ﬁlter is shown in Fig. 7 [82].
+
+Simon and Simon [84] states that the discrete linear time-
+
+invariant system can be presented by
+ð5Þ
+xkþ1 ¼ Axk þ Buk þ wk
+ð6Þ
+yk ¼ Cxk þ ek
+where k is the time index, x is the engine health vector, u is the con-
+trol variables, z is the measurements, and wk and ek are uncorre-
+lated zero-mean white-noise input sequences corresponding to
+process uncertainties and measurement noise, respectively. The
+parameter A denotes the state transition model which is applied
+to the previous state, B denotes the control-input model which is
+applied to the control vector, and C denotes the observation model
+which maps true state space into the observed space. As described
+by Volponi et al. [85] using this technique, an estimate for the
+health engine parameters shifts can be obtained by
+* ¼ D x
+D x
+
+* H:D x
+*Þ
+
+* þ DðD z
+
+ð7Þ
+
+*
+
+where D x
+is the a priori estimate of the engine health deviation,
+and D is the Kalman gain matrix, referred to as the diagnostic
+matrix, which can be computed by
+D ¼ P0HTðHP0HT þ RÞ 1
+ð8Þ
+where H is engine inﬂuence coefﬁcient matrix, R is the measure-
+ment covariance matrix and P0 is a positive semideﬁnite weighting
+matrix. The method for generating P0 and R matrices is thoroughly
+described by Urban and Volponi [86].
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+131
+
+Among the variants of the Kalman ﬁlter techniques, the linear
+Kalman ﬁlter (LKF) is the method most commonly used in engine
+diagnostics [87,88]. In a signiﬁcant effort by Kobayashi and Simon,
+a bank of LKFs was developed in which each ﬁlter is designed to
+detect a speciﬁc component, sensor, or actuator fault [89]. In this
+model, in the case of a particular fault, all ﬁlters except the one
+with the correct hypothesis produced large estimation errors,
+and thereby the speciﬁc fault could be isolated. To maintain the
+state variable estimates within a user-deﬁned envelope and ensure
+that they vary slowly with time, Simon and Simon [90] effectively
+incorporated a linear state inequality into the Kalman ﬁltering
+method.
+
+To decrease the estimation errors that are coupled with nonlin-
+earities, Simon [91] presented a comparison between LKF and two
+nonlinear Kalman ﬁlter-based techniques known as the extended
+Kalman ﬁlter (EKF) and the unscented Kalman ﬁlter (UKF) for the
+purpose of engine health monitoring. Generally, EKF is the nonlin-
+ear version of the Kalman ﬁlter that linearizes about an estimate of
+the current mean and covariance. In systems with high non-
+linearity, the EKF might result in particularly poor performance.
+Therefore, the accuracy of the model might be more signiﬁcantly
+improved using the UKF, which uses deterministic sampling to
+form a new mean and covariance estimate. This paper concludes
+that the use of an EKF warrants modeling of the engine dynamics
+nonlinearity with sufﬁcient accuracy. Use of UKF is not justiﬁable
+because it imposes a further computational burden without signif-
+icant improvement. However, based on the simulation result of a
+developed non-linear multiple model KF-based approach, Meskin
+et al. [92] proved improvements in the performance of the UKF
+over the EKF scheme in terms of fault detection times and func-
+tionality and also concluded that the UKF scheme is signiﬁcantly
+more robust to large sensor noise.
+
+Applying LKF to performance monitoring poses selected stabil-
+ity problems if few measurements are available [93]. In the case of
+negative redundancy, i.e. (m < nÞ, a smearing effect is likely to
+occur, which causes the fault to spread over multiple parameters
+rather than being correctly isolated [94]. Increasing the number
+of samples could make the redundancy positive, but because this
+might be related to nearly the same operating points, it does not
+represent a set of independent observations, and therefore, the
+estimation remains unstable. To address the effect of the undeter-
+mined problem, a tuning parameter that is a linear subset of the
+original health parameter is introduced using an optimal transfor-
+mation matrix [95]. In another study, this tuning is extended to
+state estimation of the non-linear dynamic system known as unde-
+termined EKF [82].
+
+The genetic algorithm (GA) is a heuristic search and optimiza-
+tion approach that follows the procedure of natural selection. In
+this method, the interacting variables in the problem are ﬁrst
+mixed and encoded to form a series of binary strings to generate
+numerical chromosomes. A random population of chromosomes
+is constructed and is subsequently ranked based on a ﬁtness func-
+tion to determine its accuracy. The ﬁttest string, the elite, is per-
+mitted to survive and reproduce. This process can be conducted
+using genetic operators such as crossover and mutation and leads
+to the generation of offspring chromosomes and a new higher-
+quality population. The continuous cycling character of the genetic
+operators could evolve toward the desired solutions [96].
+
+Conventional optimization for the purpose of gas turbine fault
+diagnostics was ﬁrst introduced by Stamatis et al. in 1990 [97].
+The GA algorithm adopted in gas turbine fault isolation is based
+on techniques that use sensor-based and model-based informa-
+tion. As shown in Fig. 8, the goal is to minimize an objective func-
+tion, Eq. (9) [98], that compares the performance measurements of
+the actual gas turbine with a set of measurements obtained from
+an engine performance model, which is subjected to permutation
+
+Fig. 8. Schematic representation of the fault isolation approach using GA, adopted
+from [99].
+
+of implanted faults. The solution of the algorithm is a set of
+implanted faults in a simulator in which the corresponding mea-
+surement is closest to the actual measurements and can be effec-
+tively applied for purposes of fault isolation [99].
+
+OF ¼ Xnm
+
+i¼1
+
+jzr   zdj
+zh  ri
+
+ð9Þ
+
+In Eq. 9, zr denotes the measurement vector of the actual engine, zd
+is the measurement vector of the performance simulator model in
+deteriorated condition, zh is the measurement vector of the perfor-
+mance simulator model in healthy condition, r is the standard devi-
+ation used to account for measurement noise, and nm is the number
+of measurements.
+
+Gulati et al. [100] applied the GA-based technique for a poorly
+instrumented gas turbine engine (RB199) using the concept of
+multiple objective point analysis. Sampath et al. [101] validated
+this method for fault diagnosis in advanced cycle engines (ICR
+WR21) and reported signiﬁcant success. Breikin et al. [102] pre-
+sented the concept of on-line diagnostics-based GA for gas turbine
+engines and highlighted the ability of this technique to detect
+notably small component deviations even in the presence of mea-
+surement uncertainties. However, the work of Sampath and Singh
+[103] comparing GA with other applicable methods for the purpose
+of engine health monitoring emphasizes that these advantages
+occur at
+the computation time needed for
+convergence.
+
+the expense of
+
+5.2. Data driven methods
+
+Recently, great attention has been focused on the development
+of data-driven methods, mainly known as
+computational
+intelligence-based methods, for engine fault detection and isola-
+tion. Due to their capabilities in the modeling of nonlinear dynam-
+ical
+(ANN) have been
+extensively exploited and used to achieve fault diagnostics in gas
+turbine engines. ANN is a black-box model of a nonlinear, multi-
+
+systems, artiﬁcial neural networks
+
+132
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+Fig. 9. ANN-based approach for (a) fault detection, and (b) fault isolation, adopted from [105–107].
+
+variable static and dynamic system and can be treated using input-
+output information measured from the system. The most common
+ANN includes several layers of plain processing elements known as
+neurons, the interconnections among them and the weights allo-
+cated to these interconnections. The weights store information
+related to the input-output structure of the network. For a more
+detailed overview of neural network processing and development,
+the reader is referred to [104]. The main concepts of using ANN for
+the purpose of fault detection and isolation in gas turbines are
+demonstrated in Figs. 9(a) and (b), respectively.
+
+As shown in Fig. 9, to perform fault detection analysis using
+ANN, a preliminary phase known as healthy system identiﬁcation
+is necessary. The main goal of this phase is to develop networks
+that are able to accurately represent the behavior of a gas turbine
+engine in the clean/healthy condition. Subsequently, the outputs of
+the actual engine and the trained healthy networks are used to
+generate the residuals. If the residual exceeds a predetermined
+threshold, the fault occurrence is established in the system. In fault
+isolation, a bank of neural networks, each corresponding to a par-
+ticular gas turbine fault, must be trained to act as an identiﬁer of
+faulty operating conditions. Similar to the fault detection module,
+these networks can be used in fault isolation through residual gen-
+eration. Note that in the FI module, the residuals far from zero cor-
+respond to the healthy condition or to a fault that is not accounted
+for in the ANN scheme and those close to zero that cross the
+thresholds are associated with the faulty condition.
+
+The ability to cope with measurement uncertainties and rapid
+computational speed has driven a wide range of techniques, and
+various neural network-based schemes have been developed for
+
+[111] and Asgari et al.
+
+fault detection and isolation of gas turbine engines. Although
+feed-forward back-propagation single neural networks [108] and
+a modular neural network [109] were successfully examined for
+engine diagnostic purposes, the concept of generating multiple
+neural networks for engine diagnostics was ﬁrst introduced in
+[110]. Fast et al.
+[112] developed
+ANN-based system identiﬁcation models that predict the parame-
+ters of gas turbines in various conditions and are particularly
+useful in engine performance health assessment, especially if the
+real data are only available over a limited operational range. To
+perform combined mechanical and performance health monitor-
+ing, Barad et al. [20] developed a feed-forward multilayered neural
+network (MNN) with two hidden layers using the popular back-
+propagation (BP) gradient descent algorithm for network training.
+The obtained result proves that the ANN-based performance
+health-monitoring tool is sufﬁciently robust and delivers an early
+warning compared with the mechanical parameters. Dynamic neu-
+ral networks have also been applied to achieve fault detection and
+isolation of turbine engines. The dynamic ANN-based models pro-
+posed in Refs. [105,106] demonstrate that the problem of dual
+spool engine fault detection and isolation can be addressed quite
+effectively using a bank of dynamic neural networks. More
+recently, Loboda [113] compared the probabilistic neural network
+(PNN) with Parzen window (PW) and k-nearest neighbor (K-NN)
+methods for gas turbine fault classiﬁcation using probability den-
+sity estimation.
+
+Expert systems (ES) apply expert domain knowledge in a com-
+puter program to create reasoning for problem solving through an
+automated inference engine. The ES approach can be adjusted for
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+133
+
+equipment data interpretation and condition monitoring due to its
+ability to determine systematic reasoning procedures. This
+knowledge-based approach is based on evaluation of on-line mon-
+itored data using a set of rules learned from past experiences. Liao
+[114] presented a complete literature review and classiﬁcation of
+expert systems. Selected examples of ES use to support gas turbine
+engine maintenance and diagnostics that highlight its interactivity
+and user-friendly interfaces are discussed in Spina et al. [115].
+
+The main reasoning methods implemented in ES for machine
+diagnostic applications are rule-based reasoning, case-based rea-
+soning, and model-based reasoning. A particular expert system
+that has been used recently for gas turbine diagnosis is TIGER
+[116]. Although the core of TIGER is a temporal rule-based system,
+it also uses model-based reasoning for monitoring and diagnostics.
+In another effort, case-based reasoning (CBR) was applied by GE for
+engine fault detection at their monitoring and diagnostics center in
+Atlanta [117]. The modular ‘‘plug and play” structure of the CBR
+system facilitates experimentation and optimization, and in
+2004, this system was integrated into the production environment.
+In contrast to the ES, which uses hard-and-fast if-then rules, as
+explained by Ross [118], fuzzy logic (FL) can be developed based on
+unclear/uncertain if-then rules. FL supplies an interface that aids
+experts in translating their qualitative knowledge to solve a prob-
+lem. The related variables take on fuzzy values that are character-
+ized by a membership function and a sentence. The linguistic
+variable concept could be interpreted as an elastic constraint on
+its value [119]. These constraints are spread by fuzzy inference
+operations. The resulting reasoning procedure has robust interpo-
+lation characteristics, which give fuzzy logic a signiﬁcant potency
+with respect to the changes in factors such as system parameters
+and disturbances. The general architecture of an FL-based
+approach for the purpose of fault isolation is shown in Fig. 10.
+
+Mohammadi and Montazeri-Gh [120], presented a perfect
+description of the rule and database generation process aimed at
+the development of an FL-based engine fault isolation model for
+a Siemens SGT600 gas turbine engine, a 25.4 MW two-shaft engine
+with free power turbine. The proposed model is a zero-order
+Takagi-Sugeno-Kang (TSK) type with 6 inputs and 6 outputs. The
+inputs consist of a load applied to the power turbine and deviations
+of certain measurements, including fuel ﬂow rate, gas generator
+
+speed, exhaust temperature, compressor outlet pressure and com-
+pressor outlet temperature. The outputs consist of deviation of
+compressor, gas generator turbine and power turbine efﬁciency
+and ﬂowrate, For rule-based generation, the input/output data
+pairs obtained using the engine performance simulator are replied
+via the table look-up technique [121].
+
+Several gas turbine diagnostic models have been tested and suc-
+cessfully applied based on FL theory. In 2001, Applebaum [122]
+applied the fuzzy diagnostic strategy in the development of total
+health usage and monitoring systems (THUMS) for proﬁtable
+safety monitoring of gas turbine engines. This work used a fuzzy
+expert classiﬁer to identify the fault and diagnose the residual
+trend. Gayme et al. [123] developed an FL rule-based model using
+heuristics measurements of the gas turbine and designed experi-
+ments. The results showed the notable possibility of reaching a
+credible prediction horizon for fault detection and isolation, even
+with poor-quality data that included too many gaps. Ganguli
+[124] applied the FL technique for engine module fault diagnosis
+and demonstrated a high diagnostic accuracy of 95%. The result
+from Ogaji et al. [125] proved that the FL approach preserves the
+non-linearity of the problem and can also cope with multiple
+gas-path fault isolation problems that occur if more than one single
+engine component deteriorate simultaneously. Demirci et al. [119]
+established an automated gas turbine health monitoring system
+(AEHMS) by implementing fuzzy logic that relied on the expert
+knowledge and online data, and the entire engine operation was
+simulated through Matlab and the corresponding fuzzy logic
+toolbox. Zhao and Liu [126] conducted an engine fault diagnostic
+approach that used a fuzzy logic matrix between the fault
+symptoms and causations and also considered the principle of
+maximum membership degree. The results proved that the pro-
+posed fuzzy mathematical method produces reliable fault estima-
+tion accuracy in gas turbine engines for cases of normal and
+complex relationships between the fault causes and the symptoms.
+
+5.3. Hybrid methods
+
+Although artiﬁcial intelligence systems are important for tack-
+ling practical computing problems in model-based methods, each
+of them faces certain individual limitations. Therefore, it is broadly
+
+Expert 
+
+knowledge 
+
+Or
+
+Deviation of measured 
+
+parameters
+
+Fuzzification
+
+Implanted deviation 
+in health parameters
+
+Fuzzy rule base
+
+Fuzzy interface 
+
+engine
+
+Performance 
+
+Engine 
+model
+
+Corresponding deviation 
+in measured parameters
+
+Deffuzification
+
+Deviation of the 
+health parameters
+
+Fault isolation 
+
+analysis
+
+Fig. 10. Structure of a FL-based approach for engine fault isolation.
+
+Set point
+
+Controller
+
+Ambient 
+condition
+
+134
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+acknowledged that practical and efﬁcient implementation of gas
+turbine FDI can be achieved using an appropriate combination of
+different approaches in a hybrid structure.
+
+Borguet and Léonard [127] used Kalman ﬁlter technique, which
+gives a proper estimation of the health condition for long-time-
+scale deterioration, together with a secondary adaptive component
+that searches out sudden changes in performance condition using
+residual analysis. This auxiliary component implements a general-
+ized likelihood ratio test to detect and estimate abrupt faults and
+promote model responses to rapid deterioration.
+
+In 2001, Kobayashi et al. [128] investigated a gas turbine diag-
+nostic method using both neural networks and genetic algorithms.
+In this research, ANN is applied to estimate the engine internal
+health, and GA is applied to detect sensor bias in measurement
+uncertainty. In a similar work presented by Sampath and Singh
+[103], the nested neural network functions were used as a pre-
+processor or ﬁlter to reduce the number of fault classes that are
+subsequently explored by the GA-based engine diagnostics model.
+The results showed improvement in the accuracy, reliability, and
+consistency of the diagnosis.
+
+A method that applies the fuzzy self-organizing neural network
+to gas turbine engine fault diagnosis was developed by Jiang et al.
+[129]. In this method, the relationship between the fault cause and
+fault symptoms is established according to fuzzy mathematics.
+Two-dimensional mapped pictures of the sample fault are set, and
+the actual faults are obtained via a self-organizing neural network.
+A diagnostic method consisting of a Bayesian belief network
+(BBN) and Kalman ﬁlters was presented in [93] for gas turbine
+health monitoring. In this proposed approach, a soft-constrained
+Kalman ﬁlter uses a priori information through implementation
+of the BBN at each time step to estimate the unknown performance
+parameters. This innovative method improved fault isolation capa-
+bility compared with the stand-alone Kalman ﬁlter.
+
+Verma et al. [130] developed a genetic fuzzy system (GFS) to
+perform fault isolation from noisy measurements of a gas turbine
+engine. The proposed model uses GA to decrease the human effort
+required in fuzzy systems for a trial and error process and makes
+the development of diagnostic system easier and faster. This inven-
+tive model allows rapid development of rule-based if-then fault
+signatures for different engines. In another study, Xu et al. [131]
+developed a novel diagnostic method that integrates the wavelet
+transform and neural networks to resolve the issue of local minima
+in optimization. In this model, the wavelet basis function assigned
+to every neuron of the hidden layer is determined by learning. To
+overcome the lack of samples in gas turbine diagnosis, an inte-
+grated method using fuzzy and support vector machines was pro-
+posed by Xia et al. [132]. Wang et al. [133] demonstrated a three-
+step evaluation model for engine health monitoring of gas tur-
+bines. The developed model integrates the fuzzy analytic hierarchy
+process (fuzzy AHP), fuzzy preference programming (FPP) and a
+technique for ordering the performance by similarity to the ideal
+solution known as TOPSIS. The fuzzy AHP and FPP methods are
+used to specify the relative weights of multiple evaluation criteria
+and synthesize the ratings of the engine, and TOPSIS is subse-
+quently applied to make a ﬁnal decision on the overall perfor-
+mance of each alternative.
+
+The neuro-fuzzy architecture represents an integration of fuzzy
+logic and neural network algorithms that use the learning abilities
+of neural networks with the human knowledge representation
+abilities of fuzzy systems. The neuro-fuzzy approach has been suc-
+cessfully applied for
+[134].
+Recently, this method was used as an enhanced tool for fault diag-
+nostics in gas turbine engines [135]. In 2005, Bettocchi et al. [136]
+proposed a neuro-fuzzy system for gas turbine diagnostics. In this
+research, the data generated by cycle programming were used to
+set up ANNs. The most appropriate neuro-fuzzy system structure
+
+rotating machinery diagnostics
+
+for gas turbine diagnostics is selected with respect to computa-
+tional time and robustness toward measurement uncertainty.
+Recently, Abbasi et al. [137] used a bank of time-delay multilayer
+perceptron (MLP) models to perform residual generation and sub-
+sequently applied a local
+linear neuro-fuzzy (LLNF) model to
+achieve threshold adaptation in the fault detection step.
+
+The authors believe that hybrid methods have a bright future
+ahead in applications with innovative integration of different
+methods that are able to resolve each other’s imperfections.
+
+Table 4 presents the features, similarities, differences, advan-
+tages and limitations of
+the most applied approaches for
+performance-based fault diagnosis of gas turbine engines, as high-
+lighted in the literature [16,79].
+
+Currently, the discussed engine monitoring methods have been
+applied to different engine platforms, with different levels of com-
+plexity, addressing different problems, and using different metrics
+for evaluating performance. As such it is difﬁcult to perform a one-
+to-one comparison between the accuracy of the candidate engine
+monitoring techniques. In a valuable effort and in order to address
+this shortcoming, NASA Glen Research Center provides a simulation
+platform called Propulsion Diagnostic Method Evaluation Strategy
+(ProDiMES) which is publicly available for research on the engine
+health management [138]. The overall goal was to provide an envi-
+ronment to facilitate the development and comparison of EHM
+methods against a standard and credible benchmark. Several
+research efforts have used this platform to compare various engine
+diagnostic and prognostic methods. For example, Simon et al.
+[139] presented a comparison between four diagnostic methods
+that were applied to the Pro-DiMES blind-test-case data set. The
+compared approaches includes Weighted Least Squares Single Fault
+Isolation developed by NASA Glenn, Neural Network Single Fault
+Isolation again developed by NASA Glenn, Kalman-ﬁlter based
+method developed by the University of Lie‘ge, and a Generalized
+Observer/Estimator developed by Wright State University and the
+accuracy of fault detection and isolation are extensively discussed.
+
+6. Fault identiﬁcation
+
+This section presents an overview of the deﬁnition, roots, and
+symptoms of gas path faults in gas turbine engines for the purpose
+of fault identiﬁcation. Typically, any fault in a single component or
+inconsistency in the performance of a group of components can
+increase machine degradation [140]. Generally, all possible faults
+of the gas turbine can be classiﬁed into four categories, as illus-
+trated in Fig. 11.
+
+Fouling, erosion, corrosion, hot section problems, object damage,
+clearance increase and leakage are the most common causes of gas
+path deterioration [141]. It should be noted that the common faults
+in aircraft engines and industrial engines are different to a certain
+extent [142]. Aircraft engines operate without an inlet air ﬁltration
+system, and consequently, erosion is one of the key contributors to
+degradation, especially in the compressor section. Industrial engines
+use an appropriate air ﬁltration system and are subject to fouling
+caused by smaller particles. The exception might be engines sub-
+jected to water injection in the compressor inlet [143], where an
+incorrectly sized system can generate water droplets that are sufﬁ-
+ciently large to cause blade erosion. However, the effect of a partic-
+ular fault on the performance of gas turbine is similar, regardless of
+whether the engine is used in aircraft or industrial applications.
+
+6.1. Introduction to gas path faults
+
+The main gas path faults that are common in gas turbines engi-
+nes and have an inﬂuence on their performance are discussed in
+the following subsections.
+
+Table 4
+Comparison of the most common engine FDI techniques.
+
+ICM-inversion
+
+WLS
+
+Method
+
+Strategy involved
+Linear (L)/non-linear (NL)b
+Model required
+Cope with noise and biasd
+Need n P me
+Single(S)/Multiple(M) FIf
+Smearingg
+Fast in on-line (on-wing)
+
+Main merits
+
+Both L and NL
+Ya
+Yd
+Y
+MFI
+Y
+Y
+
+– Idealistically
+
+simple
+
+Both L and NL
+Y
+Yd
+N
+MFI
+Y
+Y
+
+KF
+
+Both L and NL
+Y
+Yd
+N
+MFI
+Y
+Y
+
+GA
+
+NL
+Na c
+Y
+N
+SF/limited MF
+N
+N
+
+– Better result for small deviations
+in presence of noise and bias if
+compared with ICM inversion
+
+– Efﬁcient in presence of
+
+sensor noise and bias.
+
+– Powerful to detect very small
+health deviations because of its
+solution reﬁnement capability.
+
+Main limitations
+
+– Limited to very
+
+– Need unique expected-value base-
+
+line for each engine.
+
+– The update is necessary after any
+
+change to engine conﬁgurations.
+
+small
+degradations
+
+– Requires many
+measurements
+in
+of
+noise
+
+– Uncertain
+presence
+sensor
+and bias
+
+– Requires prior knowl-
+the
+
+edge
+tuning
+covariance matrix.
+
+for
+
+– The risk of divergence
+in
+equation
+
+due to hypothesis
+engine
+estimation.
+
+– Long convergence time.
+– Possibility of the process stop-
+
+ping at local minimum points.
+
+ANNs
+
+NL
+Nc
+Y
+N
+SF/limited MF
+N
+Y
+
+FL
+
+NL
+Nc
+Y
+N
+SF/limited MF
+N
+Y
+
+– Good
+
+generalization
+
+– Allows the use of lin-
+
+capability.
+
+– Robust in the presence
+of limited information.
+fast
+
+– Extremely
+
+convergence.
+
+– Long training time due
+to unknown optimal
+network structure.
+
+– No way to access the
+networks
+
+neural
+reasoning.
+
+– Difﬁcult
+
+to provide
+conﬁdence level asso-
+ciated with output
+result.
+
+guistic variables.
+
+– Simpler
+
+incorporation
+of knowledge in com-
+parison to ANNs.
+
+– Ability to handle impre-
+cision
+by
+deﬁning them as fuzzy
+sets.
+
+variables
+
+– Poor
+
+generalization
+capability if compared
+to ANNs.
+
+– Unable to learn since
+the rules remain ﬁxed
+after the determination.
+– Very complex to train
+
+the model.
+
+a Y stands for Yes and N stands for No.
+b Since engine performance is highly non-linear, linear models provide acceptable results only in small deviations.
+c Although just model based methods need an aero-thermodynamic model of the engine, data driven methods most likely need a model for data preparation in developing a fault isolation model.
+d Linear approaches are not able to cope with sensor noise and bias.
+e The inversion of the ICM needs the number of measurements (n) be equal or more than the number of health parameters (m), otherwise there will be more than one solution.
+f MFI approaches imply that engine deteriorate slowly, while SF/limited MF approaches imply a fast trend shift due to a single (or multiple) entity going awry.
+g Smearing is the tendency that spreads-out the faults over a large number of the engine’s components.
+
+M
+
+.
+
+T
+a
+h
+a
+n
+
+e
+t
+
+a
+l
+.
+
+/
+A
+p
+p
+l
+i
+e
+d
+
+E
+n
+e
+r
+g
+y
+
+1
+9
+8
+
+(
+2
+0
+1
+7
+)
+
+1
+2
+2
+–
+1
+4
+4
+
+1
+3
+5
+
+136
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+Gas turbine faults
+
+Gas path faults
+Compressor fouling
+Compressor erosion
+Compressor corrosion
+Turbine fouling
+Turbine erosion
+Turbine corrosion
+Object damage
+Blade rubbing and tip 
+clearance
+Thermal distortion
+
+Faults in auxiliary 
+subsystems 
+Malfunction of auxiliary 
+parts including: 
+Lube oil system
+Fuel system
+Cooling and sealing 
+Ignition gas system
+Instrument air system
+Gear box unit
+Coupling unit
+
+Mechanical errors
+Mass unbalance
+Shaft bent or bow
+Misalignment and 
+preloads
+Crack and shaft rub
+Fluid induced 
+instability
+Mechanical looseness 
+Bearing assembly 
+looseness
+
+Fig. 11. Classiﬁcation of the most common faults in gas turbine engines.
+
+Sensor uncertainties
+Short change
+Incipient faults
+Intermittent faults
+Noisy measurements
+Bias
+
+6.1.1. Fouling
+
+Fouling is the build-up of air impurities on the compressor
+blade surface. This phenomenon can result in changes in the blade
+inlet-angles, airfoil shape and surface roughness, as discussed by
+Song et al. [144]. Diakunchak [145] states that fouling is the most
+common cause of compressor deterioration and is known as the
+source of approximately 70–85% of performance degradation in
+gas turbine engines. However, fouling is a recoverable deteriora-
+tion and can be reduced or even eliminated by cleaning to restore
+the gas turbine engine ﬂow path surfaces to near initial conditions.
+Manual cleaning [146], grit-blasting [147], and ofﬂine and online
+washing [148–150] methods are various methods that have been
+proposed to prevent the unfavorable effects of compressor fouling.
+Many research studies have examined the effect of fouling on char-
+acteristic maps of an axial compressor in gas turbines. In one of the
+recent valuable studies, Yang and Xu [151] used the combination of
+a linear progression scaling method with the traditional stage
+stacking technique to investigate the effect of fouling on the per-
+formance map of axial ﬂow compressors.
+
+Meher-Homji [152] presented the causes and effects of hot sec-
+tion fouling on gas turbine engines. According to this study, when
+hot combustion products pass through ﬁrst stage nozzle, due to the
+static temperature drop, some of them may deposit on the blades.
+Since the throat area of the nozzle controls the compressor-turbine
+matching, a reduction in this area leads to a move away from the
+design match point. In addition, deposits may also accumulate on
+the rotating blades. Contaminants that lead to turbine fouling
+can enter the gas turbine by inlet air, liquid fuel, fuel additives
+and NOx control injection ﬂuid. Meher-Homji [153] pointed out
+that since the fuel mass ﬂow rate is typically less than 2% of the
+air mass ﬂow rate, 1 ppm sodium (Na, as major foulants) entering
+by fuel would have the same effect as just 20 ppb airborne salt
+entering the airﬂow. This is the main reason that most instructions
+advise less than 0.5 ppm of Na.
+
+6.1.2. Erosion
+
+Material removal from the ﬂow path components via abrasive
+hard particles such as sand and ﬂy ash is known as erosion. Balan
+and Tabakoff [154] describe how erosion causes performance
+losses due to the decrease in surface roughness, an increase in
+blade tip clearance, blunting of the blade leading edge, thinning
+of the trailing edge and shortening of the blade chord. Hamed,
+Tabakoff et al. [155] listed the main parameters that have an inﬂu-
+
+ence on gas turbine erosion, including ingested particle character-
+istics, gas ﬂow path and blade geometry, operating condition, and
+blade material. Particle size has a great inﬂuence on the blade
+impact patterns because larger particles affect the rotor and vane
+blades and smaller particles tend to follow the ﬂow path [156].
+In the turbine section, damage due to erosive particles that enter
+with the fuel is particularly severe, especially if blockage of the
+cooling holes occurs. An excessive increase in the blade tempera-
+ture and creep rupture are the main consequences of this phe-
+nomenon. Because the ﬁltration system used in industrial
+applications can probably remove the bulk of the bigger particles,
+erosion is more typically a problem in aero-derivative gas turbines
+[157].
+
+6.1.3. Corrosion
+
+Corrosion is the loss or deterioration of material from the ﬂow
+path component caused by chemical reactions between the com-
+ponent and certain contaminants that enter the gas turbine with
+the inlet air, fuel, water or steam [158]. Both compressor and tur-
+bine components are exposed to aggressively corrosive conditions,
+and hence, this deterioration is often divided into three forms,
+including compressor section corrosion, hot section corrosion,
+and standby corrosion
+
+Acceleration of air in compressor inlet guide vanes causes water
+vapor to be condensed. In this condition, salt particles get dissolved
+and may enter to the compressor. The water evaporates as it moves
+through the compressor and, at times, salt is found deposited on
+the compressor blades. Experience has shown that the deposits
+often contain sodium and potassium chlorides. Salty environment
+leads to pitting corrosion of the blades. This kind of corrosion only
+happens in compressor section and according to Haskell [159] is
+rarely experienced after the eighth stage of the compressor as no
+moisture will survive at a high temperature of this location. Similar
+to erosion and fouling, corrosion can be controlled with good ﬁltra-
+tion; however, the right conditions of fog, humidity, or rain can
+cause migration of the salt through the inlet ﬁlter. A much more
+common attack is caused by offensive atmospheric condition
+whereas engine operates in marine environments and heavy
+industrial areas located near chemical plants or industrial cement
+factories [160].
+
+For a given gas turbine, the speciﬁc work of the ideal engine
+cycle depends on the maximum to minimum temperature ratio.
+Temperature increase results to increased high-temperature oxida-
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+137
+
+tion, hot corrosion, and sulphidation. In this condition, poor selec-
+tion of material and coating may lead to catastrophic failure. High-
+temperature oxidation is the chemical reaction between compo-
+nents surface metal atoms and oxygen from surrounding hot gas-
+eous environment [161]. It results in the formation of an external
+oxide scale that may be protective. However, oxide scales can crack
+or spall from the substrate surface due to thermally induced stres-
+ses when subjected to vibration and start/stop thermal cycles
+[162]. This phenomenon may also occur on the inner surface of
+blade cooling passage and result in blade failure. Hot oxidation
+starts at 810°K but accelerates at higher temperature [153].
+
+Corrosion on engines that are not used for long extended peri-
+ods is an issue that needs to be addressed by preservation methods
+[158]. Meher-Homji and Gabriles [163] remarks this kind of corro-
+sion is the result of air moisture and corrosive particles presence in
+the machine and normally happens during an engine shutdown. In
+the case that corrosion products accumulate in the blade attach-
+ment areas, because of clearance increase, crevice corrosion may
+take place. In another case, the presence of corrosive material pos-
+sibly from airborne salt
+frequently cause corrosion pits on
+uncoated airfoils, which has the risk of cracking. Standby corrosion
+reduces the blade fatigue strength signiﬁcantly which demon-
+strates symptoms of stress corrosion fatigue as discussed by Sohre
+[164].
+
+6.1.4. Object damage
+
+When an object enters the gas path of a turbine engine, there is
+a high probability that it will impact rotating or stationary compo-
+nents before being exhausted. This is true for both foreign objects
+such as stones, hardware, pavement fragments, and birds ingested
+at the intake with the working ﬂow, which causes foreign object
+damage (FOD), and domestic objects such as nuts, bolts and pieces
+of an airfoil liberated within the engine itself, which leads to
+domestic object damage (DOD) [165]. This damage takes the form
+of sharp V-notches in the leading edge of blades, especially in the
+early compressor stages, where these foreign substances impact,
+as discussed by Nowell, Dini et al. [166]. Notches dimension vary
+from few micrometers to tens of millimeters, based on the blade
+construction, particle size, nature of the foreign object and the
+intensity of impact [167]. Object damage is not a serious problem
+in industrial gas turbine compared with aircraft. The ease with
+which object damage can be detected is a strong function of its
+extent. In some cases, a step change in vibration may be noticeable,
+in others, a drop in performance may be signiﬁcant [145].
+
+6.1.5. Tip clearance increase (blade rubbing)
+
+Due to the differential pressure across the compressor blades,
+leakage ﬂow from the pressure surface to the suction surface
+through the tip clearance area is common. The effect of this leakage
+on the pressure rise, efﬁciency drop, and operational stability can-
+not be neglected [168]. An extensive investigation of axial com-
+pressor
+tip clearance ﬂow and the relevant active control
+
+Table 5
+Classiﬁcation of engine gas path faults.
+
+methods was presented by Bae et al. [169]. Kempe et al. [170] pro-
+posed an all-ﬁber, self-calibrating, economical probe capable of
+near-real-time, single-port, simultaneous blade-to-blade tip clear-
+ance measurements with sub-millimeter accuracy in the ﬁrst
+stages of a gas turbine. To improve the gas turbine performance,
+Fabian et al. [171] investigated a control system used to maintain
+a constant blade tip clearance throughout the entire engine
+operation.
+
+6.1.6. Thermal distortion
+
+In the combustion chamber exit, changes in the radial and cir-
+cumferential temperature traverse pattern could lead to temporary
+or permanent deformation [172]. This problem, which could occur
+due to faults in the fuel nozzle sprays and wrapped combustion
+chamber components, results in ﬁrst-stage turbine blades that
+are untwisted, bowed, burnt or wrapped [173].
+
+Classiﬁcation of performance-related faults based on their loca-
+tion and whether they are recoverable or not is shown in Table 5.
+
+6.2. Gas path fault quantiﬁcation
+
+To perform fault identiﬁcation or to create a foundation for sim-
+ulating faults in a computer program, the relationship between
+physical faults and component deterioration must be determined.
+Table 6 presents a brief summary of research that has been per-
+formed to quantify this relationship.
+
+Based on the review presented in Table 6 and many other refer-
+ences, including [35,172], Zwebek et al. [184] summarized the
+effect of various physical faults on component health parameter
+degradation, as listed in Table 7.
+
+In the fault identiﬁcation process, it is useful to ﬁnd a relation-
+ship between the faults and their corresponding effects on the
+engine performance. In this regard, Zwebek et al. [184] provided
+a representation of component degradation used to simulate the
+effect of implanted faults on gas turbine performance. In another
+valuable effort, [185] investigated the effect of different kinds of
+faults on the engine compressor characteristics and discuss the
+way of faults modeling in more detail; where the stage character-
+istics modiﬁcation factors are formed by considering severity and
+distribution of the fault.
+
+The effects of main gas path component degradation on gas tur-
+bine performance are reported in several research studies. Zwebek
+and Pilidis [184] investigated changes in gas turbine efﬁciency,
+power output, exhaust temperature, and exhaust mass ﬂow by
+implanting component faults into an engine performance model
+developed by TURBOMACH, which is the gas turbine performance
+code of Cranﬁeld University. The obtained results show that degra-
+dation in the turbine’s isentropic efﬁciency has the greatest nega-
+tive impact on engine power and thermal efﬁciency. The study also
+reports that the effect of component isentropic efﬁciency on
+exhaust ﬂow capacity is negligible, and this parameter is primarily
+affected by ﬂow capacity changes due to faults such as fouling and
+
+Location
+
+Cold section
+
+Hot section
+
+Common
+
+Fault type
+ Compressor fouling
+ Compressor erosion caused by particles entered with air
+ Compressor pitting corrosion due to salty environment
+ Foreign object damage
+ Turbine fouling
+ Turbine Erosion caused by particles entered with fuel
+ Turbine hot corrosion and high-temperature oxidation
+ Domestic object damage
+
+Recoverable or non-recoverable
+
+Recoverable
+Non-recoverable
+Non-recoverable
+Non-recoverable
+
+Recoverable
+Non-recoverable
+Non-recoverable
+
+Non-recoverable
+
+138
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+Table 6
+Quantiﬁcation of gas turbine faults in the literature.
+
+Fault
+
+Fouling
+
+Reference
+
+Defected component
+
+Fouﬂias, Gannan et al. [174]
+Mund and Pilidis [175]
+
+Compressor
+Compressor
+
+Meher-Homji [152]
+
+Turbine
+
+Finding: the effect of fault on component performance
+ Due to change in aerodynamic shape of blades, compressor efﬁciency decreases.
+ Due to the accumulation of contaminants, the boundary layers become thicker
+ Due to change in airfoil geometry, the ﬂow capacity and efﬁciency decrease and
+
+which leads to reduced air ﬂow capacity.
+
+Erosion
+
+Hamed, Tabakoff et al. [176]
+
+Compressor
+
+Sugano, Yamaguchi et al. [177]
+Diakunchak [35]
+
+Compressor
+Turbine
+
+Corrosion
+
+Boyle [178]
+
+Compressor and turbine
+
+Tip clearance
+
+Graf, Wong et al. [179]
+
+Compressor
+
+Frith [180]
+
+Compressor
+
+Melcher and Kypuros [181]
+
+Turbine
+
+Radtke and Dibelius [182]
+
+Turbine
+
+the operating line shifts closer to the surge.
+
+pressor decrease.
+
+ The pressure ratio, mass ﬂow rate, and in particular, the efﬁciency of the com-
+ The efﬁciency dropped and the surge limit has decreased.
+ Erosion reduces the thickness of airfoil trailing edge which causes increased ﬂow
+ A 1 % decrease in turbine efﬁciency due to erosion leads to 3.7% loss in power and
+
+capacity, but it is unacceptable from mechanical integrity considerations.
+
+2.7% increase in heat rate.
+
+capacity.
+
+ Increased surface roughness and thicker boundary layers reduce the ﬂow
+ A two-stage turbine efﬁciency losses of 2.5% for a 10.2 lm surface roughness is
+ Hot section corrosion due to fuel’s impurities and additives is typically more sev-
+
+reported.
+
+ere than compressor section corrosion which is due to salt entered by air.
+
+ Increased clearance from 2.9% to 4.3%, leads to a 2.5% loss of efﬁciency, 20%
+increase in surge ﬂow coefﬁcient, and 12% reduction in design pressure coefﬁ-
+cient. This is mainly due to the leakage ﬂow from pressure surface to the suction
+surface through the tip clearance area.
+ A 3% tip clearance increase on the axial compressor stages decreases ﬂow capac-
+ity by 4.6% and drops the pressure ratio by 3%, and decrease in compressor efﬁ-
+ciency by 2.5%.
+ A 0.25 mm change in turbine tip clearance may cause up to 10 °C engine exhaust
+ Increasing the radial clearances at the rotors and stators tip from 0.5% and 0.4%,
+
+gas temperature and decrease turbine efﬁciency up to 1.3%
+
+Thermal
+
+distortion
+
+MacLeod, Taylor et al. [183]
+
+Turbine
+
+of the blade height, respectively, to 0.8% leads to 0.6% decrease in efﬁciency.
+
+ Both the turbine isentropic efﬁciency and ﬂow capacity are effected, even though
+
+the effect on ﬂow capacity is not as much as an effect on efﬁciency.
+
+Table 7
+Effects of various faults on component degradation [184].
+
+Physical fault
+
+Compressor fouling
+Compressor erosion
+Compressor corrosion
+Compressor blade
+
+rubbing
+
+Turbine fouling
+Turbine erosion
+Turbine corrosion
+Turbine blade rubbing
+Thermal distortion
+Foreign object damage
+
+Flow capacity
+change
+CC #
+CC #
+CC #
+CC #
+CT #
+CT "
+CT #
+CT "
+CT "
+CT # & CT #
+
+Isentropic efﬁciency
+change
+#
+gC
+gC #
+gC #
+#
+gC
+
+#
+gT
+#
+gT
+gT #
+#
+gT
+gT #
+gC # & gT #
+
+erosion. Another research effort [186] studied the effect of selected
+mechanisms that cause engine degradation, namely, changes in
+blade surfaces due to erosion and fouling and changes in clear-
+ances. Yoon et al. [187] evaluated operation of a micro-gas turbine
+by implanting deterioration of various components, including the
+compressor, turbine and recuperate, by changing the component
+characteristics. The study trained a neural network using the gen-
+erated deterioration data for the purpose of fault detection and iso-
+lation. Kurz et al. [188] performed a study to investigate the effect
+of deterioration of a given component on measurable engine per-
+formance factors that are often used in condition monitoring,
+including compressor discharge pressure, gas generator speed, ﬁr-
+ing temperature, and air ﬂow. In another report, the same authors,
+Kurz et al. [142] discussed the degradation mechanism and the
+impact of component degradation on the performance of two-
+shaft gas turbine engines because they are used as the compressor
+drivers for natural gas service. The article highlights that the same
+
+level of component degradation might exhibit different relative
+performance reductions in various ambient conditions.
+
+7. Fault prognostics
+
+Until approximately a decade ago,
+
+the focus of engine
+performance-based health monitoring technologies has been on
+diagnosis of critical faults. Moving towards an improved insight
+into engine health, the gas turbine research community has
+recently decided to incorporate time evolution into monitoring
+systems by adding prognostic capabilities. As discussed by Heng
+et al. [189], prognostics are different from traditional reliability-
+based methods that rely on event record distributions of identical
+units to estimate characteristics such as the mean-time-to-failure
+and probability of reliable operation.
+In fact, the prognostic
+approach aims to predict the ongoing degradation of the machine
+or its components currently under operation. Generally speaking,
+prognostics are based on the outputs of diagnostics, and therefore,
+the accuracy is dependent on the diagnosis accuracy. As shown in
+Fig. 12, the degradation of an engine can be detected and isolated
+using diagnostics, and the history of the engine or its component
+degradation can be fed into the prognostic model.
+
+In addition, it should be emphasized that the prognostics accu-
+racy is directly dependent to the employed methods, where gener-
+ally they can be divided into two main categories: model-based
+methods and data-driven models. The model-based prognosis
+attempts to incorporate a model of the engine into the estimation
+of degradation and the data-driven approaches commonly use
+historically recorded data to produce prediction outputs.
+In
+model-based methods prognostic accuracy is directly coupled to
+prognostic process. In these methods, the frequency of prognostics
+should be similar to that of engine model adaptation. This will
+ensure that the progressive evolution of the engine’s health signa-
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+139
+
+RUL prediction based on the historical data
+
+Allowed 
+Degradation
+
+Healthy condition
+
+Predicted degradation 
+pattern
+
+Deviation in health 
+
+parameter (
+
+)
+
+Deviation in measured 
+
+data (
+
+)
+
+Diagnostic algorithm
+
+RUL
+
+Current time
+
+t
+
+Time of maintenance
+
+based on CBM
+
+Fig. 12. Schematic representation of engine degradation, diagnostics, and prognostics, adopted from [190].
+
+ture is well reﬂected in the engine model and accurately captured
+through the diagnostics. For data-based methods a critical element
+of the prognostic process is the quality of data and the complexity
+of the employed method. Extensive and progressive training of
+Neural Networks, multiple runs of Genetic Algorithms and retun-
+ing data-based algorithms should be performed every time that
+the operating conditions of the engine are outside the operating
+envelope initially used for validating the subject methods.
+
+Prognostics can be classiﬁed based on several features, includ-
+ing the selected health parameter, time frame, type of degradation,
+and forecasting approaches.
+ A short-term investigation that predicts the future health of the
+system over a limited time horizon or a long-term investigation
+that can also forecast the remaining useful lifetime (RUL) or
+estimate the probability of reliable operation.
+ Dependent parameter-based prognostics, which rely on predic-
+tion of engine measurements, are related to the global health of
+the engine, such as gas temperature and shaft speeds, or inde-
+pendent parameter-based prognostics, which rely on prediction
+of health parameters such as component efﬁciency and ﬂow
+capacity.
+ Prediction of the gradual performance deterioration that typi-
+cally occurs due to a fault such as fouling and erosion or predic-
+tion of
+instantaneous
+deterioration due to an event such as foreign object damage.
+Although the former can be investigated using a forecasting
+algorithm, the latter can be considered using hazard plots
+[191]. The focus of this section of the current review article is
+on gradual deterioration, but one should note that when a sud-
+den fault is detected and isolated, its effect should be consid-
+ered (Fig. 12).
+
+that manifest as
+
+sudden faults
+
+Most of the published articles for gas turbine condition moni-
+toring concentrate on fault diagnostics or fault prognostics exclu-
+sively. However, as explained in Section 7, prognostics are based
+on the outputs of diagnostics. Hence, if a paper has investigated
+both issues, it has ﬁrst discussed the diagnostic and then per-
+formed prognostics. Since the concept and approaches in diagnos-
+tics and prognostics are different, they can be discussed separately.
+Therefore the following sub-sections discuss the methods and
+approaches of prognostics.
+
+7.1. Model-based methods
+
+Gas turbine model-based engine prognostic techniques are
+mainly developed using Kalman ﬁlters or various other tracking ﬁl-
+
+ters. As mentioned previously in the diagnostic section, the Kalman
+ﬁlter algorithm takes the current health state and available sensor
+measurements and generates a virtual sensor that can predict opti-
+mal estimates of engine health parameters. Simon and Simon [192]
+has successfully developed a Kalman ﬁlter-based model that incor-
+porates linear state inequality constraints for turbofan engine
+health estimation. Particle ﬁltering by the ability to include system
+parameters in the state vector for the purpose of system health
+tracking represents a good solution to failure prognosis problems.
+Daroogheh et al. [193] developed a ﬁxed-lag dynamic linear model
+with an adaptive length moving window for time series forecasting
+using a time-varying ARMA model with ﬁxed and variable model
+orders. The proposed method is applied for prognosis of gas tur-
+bine engine health parameters for the next 60 steps ahead. The
+obtained results show that even though the mass ﬂow capacity
+of the turbine is not a good feature for use in prognosis analysis,
+the failure time can be identiﬁed with acceptable accuracy for up
+to 50 steps ahead by tracking the drops in compressor and turbine
+efﬁciency.
+
+7.2. Data-driven methods
+
+Data-driven models rely only on previously observed data to
+predict the projection of a system state or to match similar pat-
+terns in the history to infer RUL. Because sensors are sources of
+considerable noise, a pre-processor smoothing algorithm can be
+applied to extract information from historically acquired data.
+Marinai [191] states that the three most common pre-processor
+techniques are simple moving average (MA), weighted MA and
+exponential smoothing. Data-driven models can generally be cate-
+gorized as statistical models and artiﬁcial intelligence models.
+
+Evolutionary/statistical models such as time-series regression,
+autoregressive moving average (ARMA), and hidden Markov model
+(HMM) have been extensively applied to engine prognostics prob-
+lems. Li and Nilkitsaranont [190] applied linear and quadratic
+regression techniques to the scattered deviation in health parame-
+ters, including compressor ﬂow and isentropic efﬁciency, for prog-
+nosis purposes. In this work, given that a constant failure rate that
+starts at the beginning of an operation is followed by an increasing
+failure rate, a linear regression model is ﬁrst applied, and quadratic
+regression is applied for the time at which a change in failure trend
+is observed. Recently, Tsoutsanis et al. [43] developed a regression-
+based method to accurately capture the component degradation
+pattern for an engine in dynamic conditions. To this end, ﬁrst, a
+nonlinear unconstrained optimization method was applied to
+reconstruct the component characteristic curves to match the
+resulting simulated measurements with those of the reference
+
+140
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+engine for each diagnostic window. Second, the developed model
+was used to diagnose the engine health degradation in sliding
+windows. Finally, the future degradation trend was accurately
+captured by local ﬁtting of the linear regression functions at the
+sliding windows. The accuracy of the proposed prognosis scheme
+was evaluated using the probability density function (PDF) and
+RUL metrics. The results show promising prospects for the pro-
+posed methodology for accurately estimating and predicting mul-
+tiple component degradations over time. An alternative approach
+has been recently proposed by Tsoutsanis and Meskin [194] where
+the acceleration of degradation of an engine component forms the
+criterion by which the aforementioned windows are activated in
+order to satisfy a linear propagation assumption for every local
+window. In another research effort, Marinai [191] presented a
+method using an ARMA model to forecast the failure risk of a Trent
+800 engine for a short-term-ahead time horizon. The results of this
+study show that ARMA has a remarkable capability for discovering
+trends and predicting the turning points in the short-term analysis.
+The accuracy of this method in short-term forecasting is affected
+by the ability of the analyst. Giantomassi et al. [195] estimated
+the RUL of turbo-fan engines using the hidden Markov model.
+The results show that the adopted approach is especially suitable
+for situations in which a large amount of data is available off-
+line. Lipowsky et al. [196] presented a novel detection technique
+based on Bayesian forecasting and dynamic linear models (DLMs).
+Bayesian forecasting enables the calculation of conditional proba-
+bilities, whereas DLMs are mathematical tools used in time series
+analysis. The combination of the two methods can be used to cal-
+culate the probability density functions prior to the next observa-
+tion or the so-called forecast distributions. The drawbacks of this
+approach are that several crucial parameters must be determined
+heuristically, which might lead to uninformative distributions,
+and once the fault is detected, a ‘‘rule of thumb’’ is involved in
+determining the gradient change in the prognostic trajectory,
+which might not be sufﬁciently accurate. To overcome this prob-
+lem, Zaidan et al. [197] established a Bayesian hierarchical model
+to perform inference and inform a probabilistic model of the
+remaining useful life. The techniques use Bayesian methods to
+combine two sources of information: historical in-service data
+across the engine ﬂeet and a once per-ﬂight transmitted perfor-
+mance measurement from the engine(s) under prognosis. The
+model is improved by applying variational inference to the hierar-
+chical formulation in order to overcome the computational and
+convergence concerns that are raised by the numerical sampling
+techniques needed for inference in the original
+formulation
+
+[198]. The proposed technique offered predictive results within
+well-deﬁned uncertainty bounds and demonstrated several advan-
+tages of the hierarchical variant’s ability to integrate multiple unit
+data and address realistic prognostic challenges. Puggina and Ven-
+turini [13] suggested an approach based on the Monte Carlo prob-
+ability distribution to predict the future health status of an engine.
+The major feature of this technique is that the prognosis can be
+implemented for both local and global performance parameters,
+such as fuel ﬂow rate or local temperatures, to estimate the sys-
+tem’s future availability.
+
+Artiﬁcial intelligence methods such as neural networks are also
+used by many researchers for the purpose of gas turbine prognostics.
+Ke-Xu et al. [199] applied a particle swarm optimized neural net-
+work to perform a time series prediction of health parameters.
+Vatani et al. [200] proposed two artiﬁcial intelligence methodolo-
+gies for degradation prognosis of gas turbine engines. The ﬁrst prog-
+nostic scheme was based on a recurrent neural network (RNN) that
+enables learning related to the engine degradation from the avail-
+able measurable data, and the second scheme was based on a nonlin-
+ear autoregressive with exogenous input (NARX) neural network
+architecture. It was shown that the NARX network can be trained
+with fewer data points and that the prediction errors are lower than
+those of the RNN architecture. In another study, Daroogheh et al.
+[201] developed a hybrid model to construct observation proﬁles
+for future time horizons. In their proposed model, the particle ﬁlter-
+ing approach is used as a model-based method to compute the
+engine states and the health parameters, and as a computationally
+intelligent technique, the artiﬁcial neural networks approach is used
+to forecast the future health scheme of the engine using the obtained
+observations. A model combining the attributes of neural networks
+and expert systems was developed by DePold and Gass [202] for
+trend change detection and prognosis of engines.
+
+As discussed above, to develop and implement a suitable prog-
+nostic approach for gas turbine engines depending on the critical-
+ity of the monitored engine, various levels of data, historical
+information, and models are required. Table 8 gives an overview
+of the recommended information and models necessary for imple-
+menting each of aforementioned prognostic models [203].
+
+8. Concluding remarks and future challenges
+
+Health management and maintenance are the most important
+concerns for heavy-duty gas turbine equipment owners, and a
+well-designed maintenance program that optimizes operational
+
+Table 8
+Required information, merits, and limitations of various engine prognostics models [203].
+
+Model-based methods
+
+Data-driven methods
+
+Requirements
+Engine model
+Failure history
+Past operating condition
+Current condition
+Identiﬁed fault pattern
+Maintenance history
+
+Merits and limitations
+Merits
+
+Required
+Beneﬁcial
+Required
+Required
+Not-required
+Beneﬁcial
+
+Beneﬁcial
+Not-required
+Not-required
+Required
+Not-required
+Not-required
+
+– Are able to incorporate the analytical understanding
+
+of the monitored system.
+
+– Establish a functional mapping between the drifting
+parameters and the selected prognostic features
+[204].
+
+– Are increasingly applied to machine prognostic and have
+conventional
+
+shown improved performances
+approaches [204].
+
+over
+
+– Are able to transform high-dimensional noisy data into
+lower dimensional information for diagnostic/prognostic
+decisions.
+
+Limitations
+
+– It is difﬁcult to capture the system’s behavior.
+
+– Are highly-dependent on the quantity and quality of sys-
+
+tem operating data [205].
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+costs and maximizes equipment availability should be developed.
+Several authors have reported on a variety of subjects related to
+gas turbine condition-based maintenance issues, such as health
+assessment, diagnostics, and prognostics. Numerous research
+efforts have emphasized the need for implementing health moni-
+toring in gas turbine maintenance since it creates faster and more
+reliable information for gas turbine users who reﬁne the mainte-
+nance strategy accordingly. Therefore, the main objective of this
+study was to review and summarize recent scholarly efforts which
+are focused in the performance-based health monitoring, diagnos-
+tics and prognostics of gas turbines. Non-performance-based mon-
+itoring methods are brieﬂy described in this review article but not
+examined thoroughly since they are beyond the main focus of this
+study. Five areas in need of consideration and improvement are
+primarily discussed: (1) performance degradation and gas path
+analysis,
+(3)
+techniques for fault detection and isolation, (4) principles of fault
+identiﬁcation, and (5) prognostic enhancement in health monitor-
+ing. The numerous summarized frameworks, procedures, and tech-
+niques along with the comprehensive research references
+introduced in this article can provide a striking platform for
+experts, students or novice researchers and decision-makers
+working in the area of gas turbine engines to know the latest
+releases and state of the art.
+
+adaptation and simulation,
+
+(2) performance
+
+In recent years, studies have demonstrated that most research
+in this area focuses on: (1) condition assessment with only few
+available measurements, (2) performance prediction and diagnos-
+tics in off-design steady and transient conditions, (3) real-time
+monitoring, (4) multiple component fault diagnostics, and (5)
+reduction of the negative effects of noise and sensor bias on condi-
+tion monitoring. Given the plethora of papers in the ﬁeld, this
+review article aims to provide insights about where the current
+research is heading and those issues that attract signiﬁcant
+research and development in the short and long term. However,
+in contrary to the existing reviews, this article aims to highlight
+the recent trend for performing diagnostics and prognostics with
+transient data where the condition monitoring systems should
+capture the fast nonlinear dynamics of the engine at an increased
+frequency in order to establish a good quality data set for diagnos-
+tic and prognostic purposes.
+
+for fault
+
+An overview of the references shows that condition monitoring
+has the potential to play an effective role in the future gas turbine
+industry as these machines become larger and offshore turbines
+become more popular. Although proof exists of rapid development
+in the recent years, certain of the main challenges that must be
+addressed by the gas turbine research community are summarized
+as follows:
+ Knowledge of the gas turbine deterioration mechanisms is
+isolation and identiﬁcation. Additional
+essential
+research in this area can enhance the accuracy of diagnostic
+models.
+ Development of tools or methods to extract, process and inter-
+pret knowledge, experience, and event data types of informa-
+tion can enhance the monitoring capabilities.
+ Development of more effective collection and accurate pre-
+analysis methods for performance data could yield great
+improvements in the development of gas turbine performance
+health monitoring systems.
+ Further investigation on development of hybrid diagnostic and
+prognostic approaches could assist in generating robust tools
+with fewer deﬁciencies and additional features.
+ The degree of user-friendliness is a major criterion in the devel-
+opment of maintenance strategies. This feature supports the
+users, many of whom do not have a profound knowledge of
+the performance of gas turbines or modeling algorithms.
+
+141
+ Finally, additional focus on the development of an integrated
+sensing, data processing, diagnostic and prognostic system
+intended to facilitate the application of condition monitoring
+in real time for shipboard plant monitoring is required for the
+next generation of intelligent maintenance systems for gas
+turbines.
+
+Acknowledgement
+
+M.T., M.M. and Z.A.A.K. are grateful for the funding provided by
+Universiti Teknologi PETRONAS. The authors would also like to
+acknowledge the constructive comments, and suggestions pro-
+vided by the anonymous reviewers that greatly improved the qual-
+ity of the article.
+
+References
+
+[1] Zaidan MA, Relan R, Mills AR, Harrison RF. Prognostics of gas turbine engine:
+
+an integrated approach. Exp Syst Appl 2015;42:8472–83.
+
+[2] Hoeft R, Gebhardt E. Heavy duty gas turbine operating and maintenance
+
+considerations. General Electric Company, Gas Turbine Division; 1993.
+
+[3] Kemp FJ, Monti A, Cabella F, Fabretto A, De Stefano A, Canchi V, et al.
+
+Monitoring system for a gas turbine engine. Google Patents; 2015.
+
+[4] GE-REPORTS. How big data and the industrial internet can help southwest
+save $100 million on fuel. <http://www.gereports.com/big-data-industrial-
+internet-can-help-southwest-save-100-million-fuel/> [accessed: Oct. 2015].
+[5] AFR. Qantas tech deal with GE tipped to save millions in fuel bills with smart
+app. <http://www.afr.com/technology/apps/business/qantas-tech-deal-with-
+ge-tipped-to-save-millions-in-fuel-bills-with-smart-app-20161006-grw5kv>
+[accessed: Oct. 2016].
+
+[6] MITSolan. GE’S BIG BET ON DATA AND ANALYTICS. <https://www.
+
+sloanreview.mit.edu/case-study/ge-big-bet-on-data-and-analytics/>
+[accessed: Feb. 2016].
+
+[7] Lee J, Scott L. Zero-breakdown machines and systems: productivity needs for
+
+next-generation maintenance. Eng Asset Manage 2006:31–43.
+
+[8] Jardine AK, Lin D, Banjevic D. A review on machinery diagnostics and
+prognostics implementing condition-based maintenance. Mech Syst Signal
+Process 2006;20:1483–510.
+
+[9] Tahan M, Muhammad M, Karim ZA. A framework for intelligent condition-
+based maintenance of rotating equipment using mechanical condition
+monitoring. In: MATEC web of conferences. EDP Sciences; 2014. p. 05011.
+
+[10] Ahmad R, Kamaruddin S. An overview of time-based and condition-based
+
+maintenance in industrial application. Comput Ind Eng 2012;63:135–49.
+
+[11] Joe Qin S. Statistical process monitoring: basics and beyond. J Chemom
+
+2003;17:480–502.
+
+[12] Engel SJ, Gilmartin BJ, Bongort K, Hess A. Prognostics, the real issues involved
+with predicting life remaining. In: Aerospace conference proceedings, 2000
+IEEE. IEEE; 2000. p. 457–69.
+
+[13] Puggina N, Venturini M. Development of a statistical methodology for gas
+
+turbine prognostics. J Eng Gas Turb Power 2012;134:022401.
+
+[14] Brasco C, Eklund N, Shah M, Marthaler D. Predictive modeling of high-bypass
+turbofan engine deterioration. In: Proceedings of the annual conference of the
+prognostics and health management society (PHM 2013).
+
+[15] Li Y. Performance-analysis-based gas turbine diagnostics: a review. Proc Inst
+
+Mech Eng, Part A: J Power Energy 2002;216:363–77.
+
+[16] Marinai L, Probert D, Singh R. Prospects for aero gas-turbine diagnostics: a
+
+review. Appl Energy 2004;79:109–26.
+
+[17] Volponi AJ. Gas turbine engine health management: past, present, and future
+
+trends. J Eng Gas Turb Power 2014;136:051201.
+
+[18] Bechini G. Performance diagnostics and measurement selection for on-line
+
+monitoring of gas turbine engines; 2007.
+
+[19] Meher-Homji CB, Bhargava R. Condition monitoring and diagnostic aspects of
+
+gas turbine transient response. Int J Turbo Jet-Engines 1994;11:99–111.
+
+[20] Barad SG, Ramaiah P, Giridhar R, Krishnaiah G. Neural network approach for a
+combined performance and mechanical health monitoring of a gas turbine
+engine. Mech Syst Signal Process 2012;27:729–42.
+
+[21] Wang W, Zhang W. A model to predict the residual life of aircraft engines
+
+based upon oil analysis data. Naval Res Log 2005;52:276–84.
+
+[22] Ogbonnaya EA. Diagnozing and prognozing gas turbine rotor shaft faults
+using ‘‘The MICE”. In: ASME turbo expo 2009: power for land, sea, and
+air. American Society of Mechanical Engineers; 2009. p. 597–606.
+
+[23] Walker R, Perinpanayagam S,
+
+Jennions I. Localizing common faults for
+improved aero engine maintenance. In: ASME 2012 international mechanical
+engineering congress and exposition. American Society of Mechanical
+Engineers; 2012. p. 325–35.
+
+[24] Madhavan S, Jain R, Sujatha C, Sekhar A. Vibration based damage detection of
+
+rotor blades in a gas turbine engine. Eng Fail Anal 2014;46:26–39.
+
+[25] Pennacchi P, Vania A. Diagnostics of a crack in a load coupling of a gas turbine
+using the machine model and the analysis of the shaft vibrations. Mech Syst
+Signal Process 2008;22:1157–78.
+
+142
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+[26] Watson MJ, Sheldon JS, Lee H, Byington CS, Behbahani A. Novel joint time
+frequency vibration diagnostics of turbine engine accessories. In: ASME turbo
+expo 2010: power for land, sea, and air. American Society of Mechanical
+Engineers; 2010. p. 353–63.
+
+[27] Pourbabaee B, Meskin N, Khorasani K. Sensor fault detection, isolation, and
+identiﬁcation using multiple-model-based hybrid Kalman ﬁlter for gas
+turbine engines. IEEE Trans Control Syst Technol 2016;24:1184–200.
+
+[28] Fadlun EA, Michelizzi I, De Iaco M. Measurement error inﬂuence on gas
+condition-based maintenance and reliability/
+turbine operability for
+availability improvement. In: ASME turbo expo 2008: power for land, sea,
+and air. American Society of Mechanical Engineers; 2008. p. 617–25.
+
+[29] Palmé T, Fast M, Thern M. Gas turbine sensor validation through classiﬁcation
+
+with artiﬁcial neural networks. Appl Energy 2011;88:3898–904.
+
+[30] Roumeliotis I, Aretakis N, Alexiou A.
+
+performance assessment with ﬁeld data.
+2017;139:051202.
+
+Industrial gas turbine health and
+J Eng Gas Turbines Power
+
+[31] Tsalavoutas A, Aretakis N, Mathioudakis K, Stamatis A. Combining advanced
+data analysis methods for the constitution of an integrated gas turbine
+condition monitoring and diagnostic system. In: ASME turbo expo 2000:
+power for land, sea, and air. American Society of Mechanical Engineers; 2000.
+p. V004T04A6-VT04A6.
+
+[32] Ogaji S, Sampath S, Singh R, Probert S. Parameter selection for diagnosing a
+
+gas-turbine’s performance-deterioration. Appl Energy 2002;73:25–46.
+
+[33] Urban LA. Parameter selection for multiple fault diagnostics of gas turbine
+
+engines. J Eng Power 1975;97:225.
+
+[34] Urban LA. Parameter selection for multiple fault diagnostics of gas turbine
+
+engines. J Eng Power 1975;97:225–30.
+
+[57] Alemu Lemma T, Fakhruldin BMH, Chalilullah R. Generating gas turbine
+component maps relying on partially known overall system characteristics. J
+Appl Sci 2011;11:1885–94.
+
+[58] Fei J, Zhao N, Shi Y, Feng Y, Wang Z. Compressor performance prediction using
+a novel feed-forward neural network based on Gaussian kernel function. Adv
+Mech Eng 2016;8. 1687814016628396.
+
+[59] Ghorbanian K, Gholamrezaei M. An artiﬁcial neural network approach to
+
+compressor performance prediction. Appl Energy 2009;86:1210–21.
+
+[60] Yu Y, Chen L, Sun F, Wu C. Neural-network based analysis and prediction of a
+compressor’s characteristic performance map. Appl Energy 2007;84:48–55.
+[61] Gholamrezaei M, Ghorbanian K. Application of integrated fuzzy logic and
+neural networks to the performance prediction of axial compressors. Proc
+Inst Mech Eng, Part A: J Power Energy 2015. 0957650915596877.
+
+[62] Templalexis I, Pilidis P, Pachidis V, Kotsiopoulos P. Development of a 2-D
+compressor streamline curvature code. In: ASME turbo expo 2006: power for
+land, sea, and air. American Society of Mechanical Engineers; 2006. p.
+1005–14.
+
+[63] Rashidzadeh H, Hosseinalipour SM, Mohammadzadeh A. The SGT-600
+for mechanical drive
+J Mech Sci Technol
+
+turbine modeling
+conditions.
+
+the steady state
+
+twin-shaft
+
+gas
+
+industrial
+applications
+2015;29:4473–81.
+
+at
+
+[64] Visser WP, Broomhead MJ. GSP, a generic object-oriented gas turbine
+simulation environment. In: ASME turbo expo 2000: power for land, sea,
+and air. American Society of Mechanical Engineers; 2000. p. V001T01A2-
+VT01A2.
+
+[65] Kurzke J. GASTURB 12 user’s manual. Dachau, Germany: GasTurb GmbH;
+
+2013.
+
+[35] Diakunchak IS. Performance deterioration in industrial gas turbines. J Eng Gas
+
+[66] Lytle JK. The numerical propulsion system simulation: a multidisciplinary
+
+Turb Power 1992;114:161–8.
+
+design system for aerospace vehicles; 1999.
+
+[36] Mathioudakis K, Kamboukos P. Assessment of the effectiveness of gas path
+
+[67] Follen G, AuBuchon M. Numerical zooming between a NPSS engine system
+
+diagnostic schemes. J Eng Gas Turb Power 2006;128:57–63.
+
+[37] Kobayashi T, Simon DL. Hybrid neural-network genetic-algorithm technique
+for aircraft engine performance diagnostics. J Propul Power 2005;21:751–8.
+[38] Misté GA, Benini E. Turbojet engine performance tuning with a new map
+
+adaptation concept. J Eng Gas Turb Power 2014;136:071202.
+
+[39] Walsh PP, Fletcher P. Gas turbine performance. Wiley.com; 2004.
+[40] Razak A. Industrial gas turbines. Woodhead; 2007.
+[41] Tsoutsanis E, Li Y, Pilidis P, Newby M. Part-load performance of gas turbines:
+Part I—A novel compressor map generation approach suitable for adaptive
+simulation. In: ASME 2012 gas turbine india conference. American Society of
+Mechanical Engineers; 2012. p. 733–42.
+
+[42] Tsoutsanis E, Li Y, Pilidis P, Newby M. Part-load performance of gas turbines:
+Part II—Multi-point adaptation with compressor map generation and GA
+optimization. In: ASME 2012 gas turbine india conference. American Society
+of Mechanical Engineers; 2012. p. 743–51.
+
+[43] Tsoutsanis E, Meskin N, Benammar M, Khorasani K. A dynamic prognosis
+Energy
+
+operation
+
+turbines.
+
+ﬂexible
+
+Appl
+
+gas
+
+of
+
+scheme
+2016;164:686–701.
+
+for
+
+[44] Sellers JF, Daniele CJ. DYNGEN: a program for calculating steady-state and
+transient performance of turbojet and turbofan engines. National Aeronautics
+and Space Administration; 1975.
+
+[45] Kong C, Ki J, Kang M. A new scaling method for component maps of gas
+turbine using system identiﬁcation. J Eng Gas Turb Power 2003;125:979–85.
+[46] Li Y-G, Marinai L, Pachidis V, Gatto EL, Philidis P. Multiple-point adaptive
+performance simulation tuned to aeroengine test-bed data. J Propul Power
+2009;25:635–41.
+
+[47] Li Y, Ghaﬁr MA, Wang L, Singh R, Huang K, Feng X. Nonlinear multiple points
+gas turbine off-design performance adaptation using a genetic algorithm. J
+Eng Gas Turb Power 2011;133:071701.
+
+[48] Muir DE, Saravanamuttoo HI, Marshall D. Health monitoring of variable
+J Eng Gas Turb Power
+
+geometry gas turbines for the Canadian Navy.
+1989;111:244–50.
+
+[49] Howell A, Bonham R. Overall and stage characteristics of axial-ﬂow
+
+compressors. Proc Inst Mech Eng 1950;163:235–48.
+
+[50] Spina P. Gas
+
+turbine performance prediction by using generalized
+performance curves of compressor and turbine stages. In: ASME turbo expo
+2002: power for land, sea, and air. American Society of Mechanical Engineers;
+2002. p. 1073–82.
+
+[51] Mirza-Baig F, Saravanamuttoo H. Off-design performance prediction of
+turbofans using gasdynamics. In: ASME 1991 international gas turbine and
+aeroengine congress and exposition. American Society of Mechanical
+Engineers; 1991. p. V002T02A34-VT02A34.
+
+[52] Lee JJ, Kim TS. Development of a gas turbine performance analysis program
+
+and its application. Energy 2011;36:5274–85.
+
+[53] Kong C, Ki J. Components map generation of gas turbine engine using genetic
+J Eng Gas Turb Power
+
+algorithms and engine performance deck data.
+2007;129:312–7.
+
+[54] Tsoutsanis E, Meskin N, Benammar M, Khorasani K. A component map tuning
+turbine
+
+method for performance prediction and diagnostics of gas
+compressors. Appl Energy 2014;135:572–85.
+
+[55] Tsoutsanis E, Meskin N, Benammar M, Khorasani K. Transient gas turbine
+performance diagnostics through nonlinear adaptation of compressor and
+turbine maps. J Eng Gas Turb Power 2015;137:091201.
+
+[56] Li Y, Ghaﬁr MA, Wang L, Singh R, Huang K, Feng X, et al. Improved multiple
+point nonlinear genetic algorithm based performance adaptation using least
+square method. J Eng Gas Turb Power 2012;134:031701.
+
+simulation and a one-dimensional high compressor analysis code; 2000.
+
+[68] Bala A, Sethi V, Lo Gatto E, Pachidis V, Pilidis P. PROOSIS—a collaborative
+venture for gas turbine performance simulation using an object oriented
+programming schema. In: ISABE 2007 proceedings, ISABE; 2007. p. 1357.
+
+[69] Ki J, Kong C, Kho S, Lee C. Steady-state and transient performance modeling of
+J Eng Gas Turb Power
+
+smart UAV propulsion system using Simulink.
+2009;131:031702.
+
+[70] Gobran M. Off-design performance of solar Centaur-40 gas turbine engine
+
+using Simulink. Ain Shams Eng J 2013;4:285–98.
+
+[71] Tsoutsanis E, Meskin N, Benammar M, Khorasani K. Dynamic performance
+simulation of an aeroderivative gas turbine using the matlab simulink
+environment. In: ASME 2013 international mechanical engineering congress
+and exposition. American Society of Mechanical Engineers; 2013. p.
+V04ATA050-V04AT04A.
+
+[72] Chen J, Patton RJ. Robust model-based fault diagnosis for dynamic
+
+systems. Kluwer Academic Publishers; 1999.
+
+[73] Kamboukos P, Mathioudakis K. Comparison of linear and nonlinear gas
+
+turbine performance diagnostics. J Eng Gas Turb Power 2005;127:49–56.
+
+[74] Urban LA. Gas turbine engine parameter interrelationships. Hamilton
+
+Standard Division of United Aircraft Corporation; 1969.
+
+[75] Smetana FO. Turbojet engine gas path analysis: a review. AGARD Diagnostics
+
+and Engine Condition Monitoring 13 p(SEE N 75-31083 22-07); 1975.
+
+[76] Escher P, Singh R. An object-oriented diagnostics computer program suitable
+international congress of
+
+for industrial gas turbines.
+combustion engines (CIMAC) Interlaken Switzerland.
+
+In: United 21st
+
+[77] Barwell M. Compass ground based engine monitoring program for general
+
+application. Rolls Royce; 1987.
+
+[78] Urban LA, Volponi AJ. Mathematical methods of relative engine performance
+
+diagnostics. SAE Technical Paper Series; 1992.
+
+[79] Kamunge D. A non-linear weighted least squares gas turbine diagnostic
+
+approach and multi-fuel performance simulation; 2011.
+
+[80] Doel DL. Interpretation of weighted-least-squares gas path analysis results. J
+
+Eng Gas Turb Power (Trans ASME) 2003;125:624–33.
+
+[81] Li Y, Korakiantis T. Nonlinear weighted-least-squares estimation approach for
+
+gas-turbine diagnostic applications. J Propul Power 2011;27:337–45.
+
+[82] Lu Feng, Hongfei Ju, Huang Jinquan. An improved extended Kalman ﬁlter with
+inequality constraints for gas turbine engine health monitoring. Aerosp Sci
+Technol 2016;58:36–47.
+
+[83] Lu F, Ju H, Huang J. An improved extended Kalman ﬁlter with inequality
+constraints for gas turbine engine health monitoring. Aerosp Sci Technol
+2016;58:36–47.
+
+[84] Simon D, Simon DL. Constrained Kalman ﬁltering via density function
+Syst Sci
+
+turbofan engine health estimation.
+
+Int
+
+J
+
+truncation for
+2010;41:159–71.
+
+[85] Volponi AJ, DePold H, Ganguli R, Daguang C. The use of Kalman ﬁlter and
+neural network methodologies in gas turbine performance diagnostics: a
+comparative study. J Eng Gas Turb Power 2003;125:917–24.
+
+[86] Urban LA, Volponi AJ. Mathematical methods of relative engine performance
+
+diagnostics. SAE Technical Paper; 1992.
+
+[87] Provost M. Kalman ﬁltering applied to gas turbine analysis. In: Von Karman
+Institute Lecture Series: gas turbine condition monitoring and fault diagnosis,
+(2003-01); 2003.
+
+[88] Volponi A. Foundation of gas path analysis (part i and ii). Gas Turb Cond
+
+Monitor Fault Diag 2003;1.
+
+[89] Kobayashi T, Simon DL. Application of a bank of Kalman ﬁlters for aircraft
+
+engine fault diagnostics. DTIC Document; 2003.
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+143
+
+[90] Simon D, Simon DL. Kalman ﬁltering with inequality constraints for turbofan
+
+engine health estimation. IEE Proc-Control Theory Appl 2006;153:371–8.
+
+[91] Simon D. A comparison of ﬁltering approaches for aircraft engine health
+
+estimation. Aerosp Sci Technol 2008;12:276–84.
+
+[92] Meskin N, Naderi E, Khorasani K. Fault diagnosis of jet engines by using a
+multiple model-based approach. In: ASME turbo expo 2010: power for land,
+sea, and air. American Society of Mechanical Engineers; 2010. p. 319–29.
+
+[93] Dewallef P, Romessis C, Léonard O, Mathioudakis K. Combining classiﬁcation
+techniques with Kalman ﬁlters for aircraft engine diagnostics. J Eng Gas Turb
+Power 2006;128.
+
+[94] Borguet S, Léonard O. Coupling principal component analysis and Kalman
+ﬁltering algorithms for on-line aircraft engine diagnostics. Control Eng Pract
+2009;17:494–502.
+
+[95] Lu F, Lv Y, Huang J, Qiu X. A model-based approach for gas turbine engine
+
+performance optimal estimation. Asian J Control 2013;15:1794–808.
+
+[96] Teti R, Jemielniak K, O’Donnell G, Dornfeld D. Advanced monitoring of
+
+machining operations. CIRP Ann Manuf Technol 2010;59:717–39.
+
+[97] Stamatis A, Mathioudakis K, Papailiou K, Smith M. Gas turbine component
+fault identiﬁcation by means of adaptive performance modeling. In: ASME,
+international gas turbine and aeroengine congress and exposition, 35th,
+Brussels, Belgium; 1990. p. 1990.
+
+[98] Zedda M, Singh R. Gas turbine engine and sensor fault diagnosis using
+optimization techniques. In: Proceedings of the AIAA/ASME/SAE/ASEE joint
+propulsion conference and exhibit, Los Angeles, California; 1999. p. 1–11.
+
+[99] Sampath S, Ogaji S, Singh R, Probert D. Engine-fault diagnostics: an
+
+optimisation procedure. Appl Energy 2002;73:47–70.
+
+[100] Gulati A, Taylor D, Singh R. Multiple operating point analysis using genetic
+ISABE-
+algorithm optimization for gas turbine diagnostics.
+international symposium on air breathing engines, 15th, Bangalore, India;
+2001.
+
+In: ISOABE,
+
+[101] Sampath S, Gulati A, Singh R. Fault diagnostics using genetic algorithm for
+advanced cycle gas turbine. In: Proceedings of ASME turbo expo-Amsterdam,
+The Netherlands; 2002. p. 211–51.
+
+[102] Breikin T, Kulikov G, Arkov V, Fleming P. Dynamic modelling for condition
+monitoring of gas turbines: Genetic algorithms approach. In: 16th IFAC world
+congress.
+
+[103] Sampath S, Singh R. An integrated fault diagnostics model using genetic
+
+algorithm and neural networks. J Eng Gas Turb Power 2006;128:49–56.
+
+[104] Anthony M,
+
+Bartlett
+
+PL. Neural
+
+network
+
+learning:
+
+theoretical
+
+foundations. Cambridge University Press; 2009.
+
+[105] Vanini ZS, Khorasani K, Meskin N. Fault detection and isolation of a dual spool
+gas turbine engine using dynamic neural networks and multiple model
+approach. Inf Sci 2014;259:234–51.
+
+[106] Tayarani-Bathaie SS, Vanini ZS, Khorasani K. Dynamic neural network-based
+
+fault diagnosis of gas turbine engines. Neurocomputing 2014;125:153–65.
+
+[107] Tahan M, Muhammad M, Karim ZA. A multi-nets ANN model for real-time
+industrial gas turbine
+
+performance-based automatic fault diagnosis of
+engines. J Brazilian Soc Mech Sci Eng 2017;1–12.
+
+[108] Torella G, Lombardo G. Utilization of neural networks for gas turbine engines.
+ISABE - international symposium on air breathing engines, 12th,
+
+In:
+Melbourne, Australia; 1995. p. 358–66.
+
+[109] Zedda M, Singh R. Fault diagnosis of a turbofan engine using neural networks
+In: AIAA/ASME/SAE/ASEE joint propulsion
+
+- a quantitative approach.
+conference & exhibit, 34th, Cleveland, OH; 1998.
+
+[110] Kanelopoulos K, Stamatis A, Mathioudakis K. Incorporating neural networks
+into gas turbine performance diagnostics. In: ASME 1997 international gas
+turbine and aeroengine congress and exhibition. American Society of
+Mechanical Engineers; 1997. p. V004T15A11-VT15A11.
+
+[111] Fast M, Assadi M, De S. Development and multi-utility of an ANN model for
+
+an industrial gas turbine. Appl Energy 2009;86:9–17.
+
+[112] Asgari H, Chen X, Menhaj MB, Sainudiin R. Artiﬁcial neural network–based
+system identiﬁcation for a single-shaft gas turbine. J Eng Gas Turb Power
+2013;135:092601.
+
+[113] Loboda I. Gas turbine fault classiﬁcation using probability density estimation.
+and
+2014. p.
+
+of Mechanical
+
+In: ASME
+exposition. American Society
+V006T06A33-VT06A33.
+
+conference
+
+Engineers;
+
+technical
+
+turbine
+
+2014:
+
+turbo
+
+expo
+
+[114] Liao S-H. Expert system methodologies and applications—a decade review
+
+from 1995 to 2004. Exp Syst Appl 2005;28:93–103.
+
+[115] Spina P, Torella G, Venturini M. The use of expert systems for gas turbine
+
+diagnostics and maintenance. ASME TURBO EXPO; 2002.
+
+[116] Milne R, Nicol C. Tiger: continuous diagnosis of gas turbines. ECAI; 2000. p.
+
+711–5.
+
+[123] Gayme D, Menon S, Ball C, Mukavetz D, Nwadiogbu E. Fault diagnosis in gas
+turbine engines using fuzzy logic. In: 2003 IEEE international conference on
+systems, man and cybernetics. IEEE; 2003. p. 3756–62.
+
+[124] Ganguli R. Application of fuzzy logic for fault isolation of jet engines. J Eng
+
+Gas Turb Power 2003;125:617–23.
+
+[125] Ogaji S, Marinai L, Sampath S, Singh R, Prober S. Gas-turbine fault diagnostics:
+
+a fuzzy-logic approach. Appl Energy 2005;82:81–9.
+
+[126] Zhao X-F, Liu Y-B, He X. Fault diagnosis of gas turbine based on fuzzy matrix
+and the principle of maximum membership degree. Energy Proc
+2012;16:1448–54.
+
+[127] Borguet S, Léonard O. A generalized likelihood ratio test for adaptive gas
+
+turbine performance monitoring. J Eng Gas Turb Power 2009;131.
+
+[128] Kobayashi T, Simon DL, Kobayashi T. A hybrid neural network-genetic
+
+algorithm technique for aircraft engine performance diagnostics; 2001.
+
+[129] Jiang D-X, Wang F, Zhou M, Ni W-D. Application of fuzzy self-organizing
+J Aerospace Power
+
+neural network to aeroengine fault diagnosis.
+2001;16:80–2.
+
+[130] Verma R, Roy N, Ganguli R. Gas turbine diagnostics using a soft computing
+
+approach. Appl Math Comput 2006;172:1342–63.
+
+[131] Xu Q-Y, Meng X-Y, Han X-J, Meng S. Gas turbine fault diagnosis based on
+wavelet neural network. In: 2007 ICWAPR’07 international conference on
+wavelet analysis and pattern recognition. IEEE; 2007. p. 738–41.
+
+[132] Xia F, Zhang H, Peng D, Li H, Su Y. Turbine fault diagnosis based on fuzzy
+computational
+
+intelligence
+
+SVM.
+
+and
+
+In:
+
+theory
+intelligence. Springer; 2009. p. 668–76.
+
+Artiﬁcial
+
+and
+
+[133] Wang J, Fan K, Wang W. Integration of fuzzy AHP and FPP with TOPSIS
+Syst Appl
+
+assessment.
+
+aeroengine
+
+health
+
+Exp
+
+methodology
+for
+2010;37:8516–26.
+
+[134] Zio E, Gola G. A neuro-fuzzy technique for fault diagnosis and its application
+
+to rotating machinery. Reliab Eng Syst Saf 2009;94:78–88.
+
+[135] Palade V, Patton RJ, Uppal FJ, Quevedo J, Daley S. Fault diagnosis of an
+industrial gas turbine using neuro-fuzzy methods. In: Proceedings of the 15th
+IFAC world congress. p. 21–6.
+
+[136] Bettocchi R, Pinelli M, Spina P, Venturini M. Artiﬁcial intelligence for the
+diagnostics of gas turbines – Part II: Neuro-fuzzy approach. Trans ASME-A-
+Eng Gas Turb Power 2007;129:720–9.
+
+[137] Abbasi Nozari H, Aliyari Shoorehdeli M, Simani S, Dehghan Banadaki H.
+Model-based robust fault detection and isolation of an industrial gas turbine
+prototype
+Neurocomputing
+2012;91:29–47.
+
+techniques.
+
+computing
+
+using
+
+soft
+
+[138] Simon DL. Propulsion diagnostic method evaluation strategy (ProDiMES)
+
+user’s guide; 2010.
+
+[139] Simon DL, Borguet S, Léonard O, Zhang XF. Aircraft engine gas path diagnostic
+Power
+
+benchmarking
+
+Eng Gas
+
+results.
+
+Turb
+
+J
+
+methods: public
+2014;136:041201.
+
+[140] Kurz R, Brun K, Wollie M. Degradation effects on industrial gas turbines. J Eng
+
+Gas Turb Power 2009;131.
+
+[141] Razak A, Carlyle J. An advanced model based health monitoring system to
+reduce gas turbine ownership cost. In: Proceedings of ASME TURBOEXPO
+2000.
+
+[142] Kurz R, Brun K. Degradation of gas turbine performance in natural gas service.
+
+J Nat Gas Sci Eng 2009;1:95–102.
+
+[143] Kurz R, Simmons HR. Aerodynamic instability and life-limiting effects of inlet
+and interstage water injection into gas turbines. J Eng Gas Turb Power
+2006;128:617.
+
+[144] Song TW, Sohn JL, Kim T, Kim J, Ro ST. An improved analytic model to predict
+fouling phenomena in the axial compressor of gas turbine engines. In:
+Proceedings of
+Japan;
+November 2003. p. 2–7.
+
+the international gas turbines congress, Tokyo,
+
+[145] Diakunchak IS. Performance deterioration in industrial gas turbines. J Eng Gas
+
+Turb Power (United States) 1992;114.
+
+[146] Meher-Homji CB, Chaker M, Bromley AF. The fouling of axial ﬂow
+
+compressors: causes, effects, susceptibility, and sensitivity. ASME; 2009.
+
+[147] Lambart P, Gordon R, Burnett M. Developments in on line gas turbine
+compressor cleaning. In: Proceedings of the institution of diesel and gas
+turbine Engineers 2nd gas turbine conference. p. 136–42.
+
+[148] Syverud E. Axial compressor performance deterioration and recovery through
+
+online washing. Norwegian University of Science and Technology; 2007.
+
+[149] Wahba EM, Nawar H. Multiphase ﬂow modeling and optimization for online
+
+wash systems of gas turbines. Appl Math Model 2013;37(14):7549–60.
+
+[150] Mund FC, Pilidis P. Gas
+
+compressor washing: historical
+developments, trends and main design parameters for online systems. J
+Eng Gas Turb Power 2006;128:344–53.
+
+turbine
+
+[117] Devaney M, Cheetham W. Case-based reasoning for gas turbine diagnostics.
+
+[151] Yang H, Xu H. The new performance calculation method of fouled axial ﬂow
+
+In: FLAIRS conference. p. 105–10.
+
+[118] Ross TJ. Fuzzy logic with engineering applications. John Wiley & Sons; 2009.
+[119] Demirci S, Hajiyev C, Schwenke A. Fuzzy logic-based automated engine
+health monitoring for commercial aircraft. Aircraft Eng Aerospace Technol
+2008;80:516–25.
+
+[120] Mohammadi E, Montazeri-Gh M. A fuzzy-based gas turbine fault detection
+and identiﬁcation system for full and part-load performance deterioration.
+Aerosp Sci Technol 2015;46:82–93.
+
+[121] Wang L-X. A course in fuzzy systems. USA: Prentice-Hall Press; 1999.
+[122] Applebaum E. Fuzzy classiﬁcation for fault isolation in gas turbine engines.
+In: IFSA world congress and 20th NAFIPS international conference, 2001 joint
+9th. IEEE; 2001. p. 292–7.
+
+compressor. Sci World J 2014;2014.
+
+[152] Meher-Homji C. Compressor and hot section fouling in gas turbines—causes
+the 9th industrial energy technology
+
+In: Proceedings of
+
+and effects.
+conference. Houston: Texas A&M University; 1987.
+
+[153] Meher-Homji CB, Chaker M, Motiwalla H. Gas turbine performance
+deterioration. In: Proceedings of the 30th turbomachinery symposium. p.
+17–20.
+
+[154] Balan C, Tabakoff W. A method of predicting the performance deterioration of
+a compressor cascade due to sand erosion. Defense Technical Information
+Center; 1982.
+
+[155] Hamed A, Tabakoff W, Wenglarz R. Erosion and deposition in
+
+turbomachinery. J Propul Power 2006;22:350–60.
+
+144
+
+M. Tahan et al. / Applied Energy 198 (2017) 122–144
+
+[156] Rivir RB, Das K, Arora P. Turbine blade surface deterioration by erosion. J
+
+[182] Radtke F, Dibelius G. Reynoldszahleinﬂuss bei hochbelasteten axialen
+
+Turbomach 2005;127:445.
+
+[157] Kurz R, Brun K. Degradation in gas turbine systems. J Eng Gas Turb Power
+
+(Trans ASME) 2001;123:70–7.
+
+[158] Kurz R, Brun K. Gas turbine tutorial—maintenance and operating practices
+effects on degradation and life. In: Proceedings of the 36th turbomachinery
+symposium.
+
+[159] Haskell R. Gas turbine compressor operating environment and material
+In: Haskell RW, editor. ASME, gas turbine and aeroengine
+
+evaluation.
+congress and exposition, Toronto, Canada, June 4–8, 1989; 13 1989.
+
+[160] Carter TJ. Common failures
+
+in gas
+
+turbine blades. Eng Fail Anal
+
+Turbinenbeschaufelungen. VDI-Berichte; 1980.
+
+[183] MacLeod J, Taylor V, Laﬂamme J. Implanted component faults and their
+J Eng Gas Turb Power
+
+effects on gas turbine engine performance.
+1992;114:174–9.
+
+[184] Zwebek A, Pilidis P. Degradation effects on combined cycle power plant
+performance—Part I: Gas turbine cycle component degradation effects. J Eng
+Gas Turb Power 2003;125:651–7.
+
+[185] Aretakis N, Roumeliotis I, Mathioudakis K. Performance model ‘‘zooming” for
+in-depth component fault diagnosis. J Eng Gas Turb Power 2011;133:031602.
+[186] Kurz R, Brun K. Degradation in gas turbine systems. J Eng Gas Turb Power
+
+2005;12:237–47.
+
+2001;123:70–7.
+
+[161] Bernstein HL. High temperature coatings for industrial gas turbine users. In:
+Proceedings of
+the 28th turbomachinery symposium. College Station
+(Texas): Turbomachinery Laboratory, Texas A&M University; 1999. p.
+179–88.
+
+[162] Pomeroy M. Coatings for gas turbine materials and long term stability issues.
+
+[187] Yoon JE, Lee JJ, Kim TS, Sohn JL. Analysis of performance deterioration of a
+micro gas turbine and the use of neural network for predicting deteriorated
+component characteristics. J Mech Sci Technol 2008;22:2516–25.
+
+[188] Kurz R, Brun K, Wollie M. Degradation effects on industrial gas turbines. J Eng
+
+Gas Turb Power 2009;131:062401.
+
+Mater Des 2005;26:223–31.
+
+[163] Meher-Homji CB, Gabriles G. Gas turbine blade failures—causes, avoidance,
+and troubleshooting. In: Proceedings of the twenty-seventh turbomachinery
+symposium. p. 129–80.
+
+[164] Sohre J. Steam turbine blade failures, causes and correction. In: Proceedings
+
+[189] Heng A, Zhang S, Tan AC, Mathew J. Rotating machinery prognostics: state of
+Signal Process
+
+and opportunities. Mech Syst
+
+challenges
+
+art,
+
+the
+2009;23:724–39.
+
+[190] Li Y, Nilkitsaranont P. Gas turbine performance prognostic for condition-
+
+based maintenance. Appl Energy 2009;86:2152–61.
+
+of the fourth turbomachinery symposium. p. 9–30.
+
+[191] Marinai L. Gas-path diagnostics and prognostics for aero-engines using fuzzy
+
+[165] Novis A, Khibnik AI. Foreign object/domestic object damage assessment.
+
+logic and time series analysis; 2004.
+
+Google Patents; 2007.
+
+[166] Nowell D, Dini D, Duó P. Stress analysis of V-notches with and without cracks,
+J Strain Anal Eng Des
+
+with application to foreign object damage.
+2003;38:429–41.
+
+[167] Silveira E, Atxaga G, Irisarri AM. Failure analysis of two sets of aircraft blades.
+
+Eng Fail Anal 2010;17:641–7.
+
+[168] Tallman J, Lakshminarayana B. Numerical simulation of tip leakage ﬂows in
+axial ﬂow turbines, with emphasis on ﬂow physics: Part I: Effect of tip
+clearance height. J Turbomach 2001;123:314–23.
+
+[169] Bae JW, Breuer KS, Tan CS. Active control of tip clearance ﬂow in axial
+
+compressors. Trans ASME-T-J Turbomach 2005;127:352–62.
+
+[170] Kempe A, Rösgen T, Haffner K. Low-coherence interferometric tip-clearance
+
+probe. Opt Lett 2003;28:1323–5.
+
+[171] Fabian T, Prinz FB, Brasseur G. Capacitive sensor for active tip clearance
+control in a palm-sized gas turbine generator. IEEE Trans Instrum Meas
+2005;54:1133–43.
+
+[172] Escher P. Pythia: an object-orientated gas path analysis computer program
+
+for general applications; 1995.
+
+[173] English L. Application of gas path analysis, gas path debris monitoring and
+expert system technology to the Allison T56 Turboprop engine MSc
+Thesis. School of Mechanical Engineering, Cranﬁeld University; 1995.
+
+[174] Fouﬂias D, Gannan A, Ramsden K, Pilidis P, Mba D, Teixeira J, et al.
+fouling on compressor
+Experimental
+cascade
+engine
+performance. Proc Inst Mech Eng, Part A: J Power Energy 2010;224:1007–18.
+[175] Mund F, Pilidis P. Online compressor washing: a numerical survey of
+J Power Energy
+
+investigation of the inﬂuence of
+for
+
+inﬂuencing parameters. Proc Inst Mech Eng, Part A:
+2005;219:13–23.
+
+characteristics
+
+implications
+
+turbine
+
+and
+
+gas
+
+[176] Hamed A, Tabakoff W, Singh D. Modeling of compressor performance
+
+deterioration due to erosion. Int J Rotat Mach 1998;4:243–8.
+
+[177] Sugano H, Yamaguchi N, Taguchi S. A study on the ash erosion of axial
+induced draft fans of coal-ﬁred boilers. TR19, Mitsubishi Heavy Industries;
+1982.
+
+[178] Boyle R. Prediction of surface roughness and incidence effects on turbine
+In: ASME 1993 international gas turbine and aeroengine
+performance.
+congress and exposition. American Society of Mechanical Engineers; 1993.
+p. V03BT16A036-V03BT16A.
+
+[179] Graf M, Wong T, Greitzer E, Marble F, Tan C, Shin H-W, et al. Effects of non-
+axisymmetric tip clearance on axial compressor performance and stability.
+In: ASME 1997 international gas turbine and aeroengine congress and
+exhibition. American Society of Mechanical Engineers; 1997. p. V001T03A66-
+VT03A66.
+
+[180] Frith PC. The effect of compressor rotor tip crops on turboshaft engine
+
+performance. J Eng Gas Turb Power 1994;116:184–9.
+
+[181] Melcher KJ, Kypuros J. Toward a fast-response active turbine tip clearance
+control. In: International symposium on air breathing engines, Cleveland,
+Ohio; 2003.
+
+[192] Simon D, Simon DL. Aircraft turbofan engine health estimation using
+
+constrained Kalman ﬁltering. J Eng Gas Turb Power 2005;127:323–8.
+
+[193] Daroogheh N, Meskin N, Khorasani K. A novel particle ﬁlter parameter
+In: 2014 American control
+
+failure prognosis.
+
+prediction scheme for
+conference. IEEE; 2014. p. 1735–42.
+
+[194] Meskin N. Derivative-driven window-based regression method for gas
+
+turbine performance prognostics. Energy 2017;128:302–11.
+
+[195] Giantomassi A, Ferracuti F, Benini A, Ippoliti G, Longhi S, Petrucci A. Hidden
+Markov model for health estimation and prognosis of turbofan engines. In:
+ASME 2011 international design engineering technical conferences and
+computers and information in engineering conference. American Society of
+Mechanical Engineers; 2011. p. 681–9.
+
+[196] Lipowsky H, Staudacher S, Bauer M, Schmidt K-J. Application of Bayesian
+forecasting to change detection and prognosis of gas turbine performance. J
+Eng Gas Turb Power 2010;132:031602.
+
+[197] Zaidan MA, Harrison RF, Mills AR, Fleming PJ. Bayesian hierarchical models
+for aerospace gas turbine engine prognostics. Exp Syst Appl 2015;42:539–53.
+[198] Zaidan MA, Mills AR, Harrison RF, Fleming PJ. Gas turbine engine prognostics
+using Bayesian hierarchical models: a variational approach. Mech Syst Signal
+Process 2016;70:120–40.
+
+[199] Ke-Xu Z, Hao-Dong M, Hong-Zheng F, Da-Wei Y. Study of prognostics for
+spacecraft based-on particle swarm optimized neural network.
+In:
+Prognostics and system health management conference (PHM-Shenzhen),
+2011. IEEE; 2011. p. 1–5.
+
+[200] Vatani A, Khorasani K, Meskin N. Health monitoring and degradation
+prognostics in gas turbine engines using dynamic neural networks. In:
+and
+ASME
+2015:
+exposition. American Society
+2015. p.
+V006T05A30-VT05A30.
+
+turbine
+of Mechanical
+
+conference
+
+Engineers;
+
+technical
+
+turbo
+
+expo
+
+[201] Daroogheh N, Baniamerian A, Meskin N, Khorasani K. A hybrid prognosis and
+health monitoring strategy by integrating particle ﬁlters and neural networks
+for gas turbine engines. In: 2015 IEEE conference on prognostics and health
+management (PHM). IEEE; 2015. p. 1–8.
+
+[202] DePold HR, Gass FD. The application of expert systems and neural networks
+to gas turbine prognostics and diagnostics. In: ASME 1998 international gas
+turbine and aeroengine congress and exhibition. American Society of
+Mechanical Engineers; 1998. p. V005T15A9-VT15A9.
+
+[203] Roemer MJ, Byington CS, Kacprzynski GJ, Vachtsevanos G. An overview of
+technologies with application to engine health
+In: ASME turbo expo 2006: power for land, sea, and
+
+selected prognostic
+management.
+air. American Society of Mechanical Engineers; 2006. p. 707–15.
+
+[204] Chelidze D. Multimode damage tracking and failure prognosis
+
+in
+electromechanical systems. In: AeroSense 2002: international society for
+optics and photonics; 2002. p. 1–12.
+
+[205] Dragomir OE, Gouriveau R, Dragomir F, Minca E, Zerhouni N. Review of
+prognostic problem in condition-based maintenance. In: 2009 European
+control conference (ECC). IEEE; 2009. p. 1587–92.
+
+
