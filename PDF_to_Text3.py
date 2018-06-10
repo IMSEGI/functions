@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed May 30 22:33:09 2018
+
+@author: David
+"""
+#document at https://media.readthedocs.org/pdf/pdfminer-docs/latest/pdfminer-docs.pdf
+#pip install pdfminer.six
+
+
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
+
+
+
+def convert_pdf_to_txt(path):
+    rsrcmgr = PDFResourceManager()
+    retstr = StringIO()
+    codec = 'utf-8'
+    laparams = LAParams()
+    device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+    fp = open(path, 'rb')
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    password = ""
+    maxpages = 0
+    caching = True
+    pagenos=set()
+    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+        interpreter.process_page(page)
+    fp.close()
+    device.close()
+    str = retstr.getvalue()
+    retstr.close()
+    return str
+
+def WriteToFile(txt, filename):
+    with open(filename + '.txt', 'w+', encoding = 'utf-8') as file:
+        file.write(txt)
+
+# Provide full path + filename below
+filename = 'S0306261917304415-main'
+text = convert_pdf_to_txt(filename + '.pdf')
+WriteToFile(text, filename)
