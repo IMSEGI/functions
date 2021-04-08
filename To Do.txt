@@ -1,0 +1,15 @@
+1.................................
+
+science_direct_pull{}
+type = {
+1. abstract
+2. full-article
+3. citations
+}
+directory = {
+full path to the save folder
+}
+
+search_terms = {
+example in line 37
+}
